@@ -41,6 +41,12 @@ public class AdminController {
         return "articleForm";
     }
 
+    @RequestMapping(value = "/article", method = RequestMethod.GET)
+    public String newArticle(Model model) {
+        model.addAttribute(new Article());
+        return "articleForm";
+    }
+
     @RequestMapping(value = "/article", method = RequestMethod.POST)
     public String saveArticle(Model model, Article article) {
         articleDao.save(article);

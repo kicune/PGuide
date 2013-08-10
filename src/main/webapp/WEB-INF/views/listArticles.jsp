@@ -19,5 +19,9 @@
     <div><a href="article/${article.id}">${article.title}</a></div>
 </c:forEach>
 
+<hr>
+
+<a href='/admin/article'>Nový článek</a>
+
 </body>
 </html>
