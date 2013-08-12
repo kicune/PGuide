@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+html {
+    font-family: arial, sans-serif;
+}
+
+div {
+    font-size: 10pt;
+}
+
+input {
+    width: 300px;
+}
+
+input.submitButton {
+    width: 150px;
+}
+
+textarea {
+    width: 600px;
+    height: 600px;
+}
+
+#leftColumn {
+    width: 250px;
+    float: left;
+}
+
+#mainColumn {
+    float: left;
+}
+
+h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

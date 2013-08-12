@@ -12,15 +12,32 @@
 <html>
 <head>
     <title>Seznam článků</title>
+    <link rel="stylesheet" type="text/css" href="/resources/admin.css" />
 </head>
 <body>
+<div id="leftColumn">
+    <h3>Seznam článků</h3>
+    <c:forEach var="article" items="${articleList}">
+        <div><a href="/admin/article/${article.id}">${article.title}</a></div>
+    </c:forEach>
+    <br>
+    <div><a href="/admin/article">Přidat nový článek</a></div>
+</div>
 
+<div id="mainColumn">
 <sf:form modelAttribute="article" method="POST" action="/admin/article">
-    ID: <sf:input path="id" /><br/>
-    Titulek: <sf:input size = "30" path="title"/><br/>
-    Článek: <sf:textarea path="text" cols="30" rows="10"/>
-    <input name="Odeslat" type="submit">
+    <div>ID:</div>
+    <div><sf:input path="id" /></div>
+    <div>Titulek:</div>
+    <div><sf:input path="title"/></div>
+    <div>Článek:</div>
+    <div><sf:textarea path="text" /></div>
+    <div style='text-align: right'>
+        <input class='submitButton' value="Uložit" type="submit">
+    </div>
 </sf:form>
+</div>
+<div style='clear: all'></div>
 
 </body>
 </html>

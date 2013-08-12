@@ -1,6 +1,9 @@
 package org.lisak.pguide.dao;
 
 import org.lisak.pguide.model.Article;
+import org.lisak.pguide.model.Content;
+import org.lisak.pguide.model.Image;
+import org.lisak.pguide.model.Profile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +14,7 @@ import java.util.List;
  * Date: 09.08.13
  * Time: 14:23
  */
-public class ArticleDummyDao implements ArticleDao {
+public class ArticleDummyDao implements ContentDao {
     Article article;
 
     public ArticleDummyDao() {
@@ -25,8 +28,8 @@ public class ArticleDummyDao implements ArticleDao {
     }
 
     @Override
-    public void save(Article article) {
-
+    public void save(Content content) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -35,7 +38,23 @@ public class ArticleDummyDao implements ArticleDao {
     }
 
     @Override
-    public List<Article> getAll() {
+    public void delete(String id) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+
+    @Override
+    public List<Image> getImages() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<Profile> getProfiles(String categoryId) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<Article> getArticles() {
         List<Article> l = new ArrayList<Article>();
         l.add(article);
         return l;

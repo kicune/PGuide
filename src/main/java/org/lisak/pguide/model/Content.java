@@ -1,5 +1,8 @@
 package org.lisak.pguide.model;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+
 /**
  * Created with IntelliJ IDEA.
 
@@ -7,8 +10,16 @@ package org.lisak.pguide.model;
  * Date: 06.08.13
  * Time: 17:19
  */
+
+@Entity
 public class Content {
-    String id;
+    @Id protected String id;
+
+    public Content() {}
+
+    public Content(String id)  {
+        this.id = id;
+    }
 
     public String getId() {
         return id;

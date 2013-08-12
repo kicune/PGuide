@@ -2,8 +2,14 @@ package org.lisak.pguide.model;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.EntitySubclass;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import org.lisak.pguide.exceptions.NoSuchEntity;
+
+import javax.security.auth.Subject;
+
+import java.util.Comparator;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
@@ -13,27 +19,19 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
  * Date: 06.08.13
  * Time: 17:12
  */
-@Entity
-public class Article {
-    @Id private String id;
-    String title;
+@EntitySubclass(index = true)
+public class Article extends Content {
+    @Index String title;
     String text;
 
     public Article() {
+        super();
     }
 
     public Article(String id, String title, String text) {
+        super(id);
         this.title = title;
-        this.id = id;
         this.text = text;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getText() {
@@ -56,4 +54,13 @@ public class Article {
 
     }
 
+    public static Comparator<Article> TitleComparator = new Comparator<Article>() {
+
+        @Override
+        public int compare(Article article, Article article2) {
+            return article.getTitle().compareTo(article2.getTitle());
+        }
+
+
+    };
 }
