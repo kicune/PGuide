@@ -1,16 +1,11 @@
 package org.lisak.pguide.controllers;
 
 import org.lisak.pguide.dao.ContentDao;
-import org.lisak.pguide.model.Article;
-import org.lisak.pguide.model.Image;
-import org.lisak.pguide.model.Profile;
+import org.lisak.pguide.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -28,17 +23,29 @@ import java.util.List;
 public class AdminController {
     @Autowired
     ContentDao contentDao;
+    @Autowired
+    CategoryFactory categoryFactory;
 
     // ******** Article upload & processing **********
     @RequestMapping(value = "/article/{articleId}", method = RequestMethod.GET)
-    public String showArticle(@PathVariable("articleId") String articleId, Model model) {
+    public String showArticle(@PathVariable("articleId") String articleId,
+                              @RequestParam(value = "delete", required = false) String delete,
+                              Model model) {
         List<Article> articleList = contentDao.getArticles();
         Collections.sort(articleList, Article.TitleComparator);
         model.addAttribute("articleList", articleList);
 
-        Article article = (Article) contentDao.get(articleId);
+        Article article;
+        if(delete == null) {
+            article = (Article) contentDao.get(articleId);
+        } else {
+            contentDao.delete(articleId);
+            article = new Article();
+            model.addAttribute(article);
+            return "redirect:/admin/article";
+        }
         model.addAttribute(article);
-        return "articleForm";
+        return "admin/articleForm";
     }
 
     @RequestMapping(value = "/article", method = RequestMethod.GET)
@@ -47,20 +54,22 @@ public class AdminController {
         model.addAttribute("articleList", articleList);
 
         model.addAttribute(new Article());
-        return "articleForm";
+        return "admin/articleForm";
     }
 
     @RequestMapping(value = "/article", method = RequestMethod.POST)
     public String saveArticle(Article article) {
         contentDao.save(article);
-        return "redirect:/admin/article";
+        return "redirect:/admin/article/" + article.getId();
     }
 
     // ******** Image upload & processing **********
 
     @RequestMapping(value = "/image/{imageId}", method = RequestMethod.GET)
     public String showImage(@PathVariable("imageId") String imageId,
-                            @RequestParam(value = "filter", required = false) String filter, Model model) {
+                            @RequestParam(value = "filter", required = false) String filter,
+                            @RequestParam(value = "delete", required = false) String delete,
+                            Model model) {
         List<Image> imgList;
         if(filter==null) {
             imgList =  contentDao.getImages();
@@ -70,9 +79,15 @@ public class AdminController {
         }
         model.addAttribute("imageList", imgList);
 
-        Image image = (Image) contentDao.get(imageId);
-        model.addAttribute(image);
-        return "imageForm";
+        Image image;
+        if(delete == null) {
+            image = (Image) contentDao.get(imageId);
+            model.addAttribute(image);
+            return "admin/imageForm";
+        } else {
+            contentDao.delete(imageId);
+            return "redirect:/admin/image";
+        }
     }
 
     @RequestMapping(value = "/image", method = RequestMethod.GET)
@@ -87,30 +102,77 @@ public class AdminController {
         model.addAttribute("imageList", imgList);
 
         model.addAttribute(new Image());
-        return "imageForm";
+        return "admin/imageForm";
     }
 
-    @RequestMapping(value = "image", method = RequestMethod.POST)
+    @RequestMapping(value = "/image", method = RequestMethod.POST)
     public String saveImage(Image image, @RequestParam(value = "imageData") MultipartFile data){
         try {
-            image.setData(data.getBytes());
+            if(data.getBytes().length>0) {
+                image.setData(data.getBytes());
+            } else {
+                //fetch original image from DB (otherwise NULL will be saved as image data):
+                Image _img = (Image)contentDao.get(image.getId());
+                image.setData(_img.getData());
+            }
+
             image.setFileType("jpg");
         }   catch (IOException e) {
-            return "imageForm";
+            return "admin/imageForm";
         }
         contentDao.save(image);
 
-        return "redirect:/admin/image";
+        return "redirect:/admin/image/" + image.getId();
     }
 
     // ******** Profile upload & processing **********
-    @RequestMapping(value = "/image", method = RequestMethod.GET)
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public String newProfile(Model model) {
         List<Profile> profileList;
         profileList =  contentDao.getProfiles();
         model.addAttribute(profileList);
 
-        model.addAttribute(new Profile());
-        return "imageForm";
+        List<Image> imageList = contentDao.getImages();
+        model.addAttribute("strImgList", imageList.toString());
+
+        List<Category> categoryList = categoryFactory.getCategoryList();
+        model.addAttribute(categoryList);
+
+        model.addAttribute("profile", new Profile());
+        return "admin/profileForm";
+    }
+
+    @RequestMapping(value = "/profile/{profileId}", method = RequestMethod.GET)
+    public String showImage(@PathVariable("profileId") String profileId,
+                            @RequestParam(value = "delete", required = false) String delete,
+                            Model model) {
+        List<Profile> profileList;
+        profileList =  contentDao.getProfiles();
+        model.addAttribute(profileList);
+
+        List<Image> imageList = contentDao.getImages();
+        model.addAttribute("strImgList", imageList.toString());
+
+
+        List<Category> categoryList = categoryFactory.getCategoryList();
+        model.addAttribute(categoryList);
+
+        Profile profile;
+        if(delete == null) {
+            profile = (Profile) contentDao.get(profileId);
+            model.addAttribute(profile);
+            return "admin/profileForm";
+        } else {
+            contentDao.delete(profileId);
+            return "redirect:/admin/profile";
+        }
+
+    }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
+    public String saveProfile(@ModelAttribute("profile") Profile profile){
+        contentDao.save(profile);
+
+        return "redirect:/admin/profile/" + profile.getId();
     }
 }

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
@@ -6,31 +7,40 @@
   User: lisak
   Date: 09.08.13
   Time: 14:21
-  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
     <title>Seznam obrázků</title>
     <link rel="stylesheet" type="text/css" href="/resources/admin.css" />
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
 </head>
 <body>
 <div id="leftColumn">
-    <h3>Seznam článků</h3>
+    <h3>Seznam obrázků</h3>
     <form method="GET" action="/admin/image">
         <div>Filtr:</div>
         <div><input name="filter" value="${filter}" style='width: 150px'/></div>
     </form>
 
     <c:forEach var="image" items="${imageList}">
-        <div><a href="/admin/image/${image.id}">${image.id}</a></div>
+        <div>
+            <a style='text-decoration: none; color: red' href="/admin/image/${image.id}?delete" onclick="return confirm('Opravdu SMAZAT?')"><b>X</b></a>
+            &nbsp;&nbsp;
+            <a href="/admin/image/${image.id}">${image.id}</a>
+        </div>
     </c:forEach>
     <br>
     <div><a href="/admin/image">Přidat nový obrázek</a></div>
+
+    <hr/>
+    <div><a href="/admin/article">Seznam článků</a></div>
+    <div><a href="/admin/profile">Seznam profilů</a></div>
 </div>
 
 <div id="mainColumn">
-    <sf:form modelAttribute="image" method="POST" action="/admin/image" enctype="multipart/form-data">
+    <sf:form modelAttribute="image" method="POST" action="/admin/image" enctype="multipart/form-data" acceptcharset="UTF-8">
         <div>ID:</div>
         <div><sf:input path="id" /></div>
         <div>Popisek:</div>

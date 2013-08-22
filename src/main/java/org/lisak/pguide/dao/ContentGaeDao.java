@@ -26,6 +26,7 @@ public class ContentGaeDao implements ContentDao {
         ObjectifyService.register(Content.class);
         ObjectifyService.register(Article.class);
         ObjectifyService.register(Image.class);
+        ObjectifyService.register(Profile.class);
     }
 
     //loads article from datastore

@@ -46,4 +46,5 @@ public class ProfileAttributes {
     public void setSmokers(boolean smokers) {
         this.smokers = smokers;
     }
+
 }

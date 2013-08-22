@@ -18,10 +18,18 @@
 <div id="leftColumn">
     <h3>Seznam článků</h3>
     <c:forEach var="article" items="${articleList}">
-        <div><a href="/admin/article/${article.id}">${article.title}</a></div>
+        <div>
+            <a style='text-decoration: none; color: red' href="/admin/article/${article.id}?delete" onclick="return confirm('Opravdu SMAZAT?')"><b>X</b></a>
+            &nbsp;&nbsp;
+            <a href="/admin/article/${article.id}">${article.title}</a>
+        </div>
     </c:forEach>
     <br>
     <div><a href="/admin/article">Přidat nový článek</a></div>
+
+    <hr/>
+    <div><a href="/admin/profile">Seznam profilů</a></div>
+    <div><a href="/admin/image">Seznam obrázků</a></div>
 </div>
 
 <div id="mainColumn">

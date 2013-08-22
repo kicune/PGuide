@@ -49,7 +49,17 @@ public class ArticleDummyDao implements ContentDao {
     }
 
     @Override
+    public List<Image> getImages(String filter) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public List<Profile> getProfiles(String categoryId) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<Profile> getProfiles() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

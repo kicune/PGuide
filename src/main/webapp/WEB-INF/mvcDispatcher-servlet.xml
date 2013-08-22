@@ -15,11 +15,39 @@
     </bean>
 
 
-    <bean id="articleDao" class="org.lisak.pguide.dao.ContentGaeDao" />
+    <bean id="contentDao" class="org.lisak.pguide.dao.ContentGaeDao" />
 
     <bean id="multipartResolver" class= "org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="1000000" />
         <property name="maxInMemorySize" value="1000000"/>
     </bean>
 
+    <!-- categories -->
+    <bean id="coffeeCategory" class="org.lisak.pguide.model.Category">
+        <property name="id" value="coffee"/>
+        <property name="name" value="Coffee"/>
+        <property name="iconUrl" value="FIXME"/>
+    </bean>
+
+    <bean id="pubCategory" class="org.lisak.pguide.model.Category">
+        <property name="id" value="pub"/>
+        <property name="name" value="Pub"/>
+        <property name="iconUrl" value="FIXME"/>
+    </bean>
+
+    <bean id="patisCategory" class="org.lisak.pguide.model.Category">
+        <property name="id" value="patisserie"/>
+        <property name="name" value="Patisserie"/>
+        <property name="iconUrl" value="FIXME"/>
+    </bean>
+
+    <bean id="categoryFactory" class="org.lisak.pguide.model.CategoryFactory">
+        <property name="categoryList">
+            <list>
+                <ref bean="coffeeCategory" />
+                <ref bean="pubCategory" />
+                <ref bean="patisCategory" />
+            </list>
+        </property>
+    </bean>
 </beans>
