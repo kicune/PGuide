@@ -13,11 +13,11 @@
 <head>
     <meta charset="utf-8" />
     <title>Seznam profilů</title>
-    <link rel="stylesheet" type="text/css" href="/resources/admin.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/admin.css" />
     <link rel="stylesheet" href="/resources/smoothness/jquery-ui.css" />
 
-    <script src="/resources/jquery-1.9.1.js"></script>
-    <script src="/resources/jquery-ui-1.10.3.custom.js"></script>
+    <script src="/resources/js/jquery-1.9.1.js"></script>
+    <script src="/resources/js/jquery-ui-1.10.3.custom.js"></script>
 
     <script>
         $(function() {
@@ -29,6 +29,11 @@
             });
 
             $( "#profileImg" ).autocomplete({
+                source: availableTags,
+                minLength: 0
+            });
+
+            $( "#staticMapImg" ).autocomplete({
                 source: availableTags,
                 minLength: 0
             });
@@ -146,6 +151,9 @@
     <div>Profilová fotka:</div>
     <div><input name="profileImg" id="profileImg" value="${profile.profileImg}" style="width: 150px"/></div>
 
+    <div>Statická mapka:</div>
+    <div><input name="staticMapImg" id="staticMapImg" value="${profile.staticMapImg}" style="width: 150px"/></div>
+
     <div>Galerie:</div>
     <div>
         <input id="galleryList" style="width: 150px"/>&nbsp;<input id="addImage" type="button" value="Přidat" style="width: 50px"/>
@@ -159,8 +167,8 @@
         </div>
     </div>
 
-    <div>Perex:</div>
-    <div><sf:textarea path="perex" style="height: 100px"/></div>
+    <!-- <div>Perex:</div>
+    <div><sf:textarea path="perex" style="height: 100px"/></div> -->
 
     <div>Text:</div>
     <div><sf:textarea path="text" /></div>

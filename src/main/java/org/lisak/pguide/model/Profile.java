@@ -3,6 +3,7 @@ package org.lisak.pguide.model;
 import com.googlecode.objectify.annotation.EntitySubclass;
 import geo.gps.Coordinates;
 
+import java.text.DecimalFormat;
 import java.util.Formatter;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class Profile extends Content {
     private ProfileAttributes attributes;
     private String profileImg;
     private List<String> gallery;
+    private String staticMapImg;
 
     public Profile() {
         attributes = new ProfileAttributes();
@@ -51,9 +53,24 @@ public class Profile extends Content {
         return gpsCoords;
     }
 
+    public String getFormattedGpsCoords() {
+        Coordinates coords = new Coordinates();
+        coords.parse(gpsCoords);
+
+        long degreesLat = Math.round(coords.getLatitude());
+        long degreesLon = Math.round(coords.getLongitude());
+
+        double minLat = (coords.getLatitude() - degreesLat)*60;
+        double minLon = (coords.getLongitude() - degreesLon)*60;
+
+        DecimalFormat df = new DecimalFormat("#.000");
+
+        return "N " + degreesLat + "° " + df.format(minLat) + "', " + "E " + degreesLon + "° " + df.format(minLon) + "'";
+    }
+
     public void setGpsCoords(String strCoords) {
         //parse and normalize gps coords to decimal form
-
+        //it is not possible to store Coordinates directly with Objectify
         Coordinates coords = new Coordinates();
         coords.parse(strCoords);
 
@@ -99,6 +116,13 @@ public class Profile extends Content {
         return text;
     }
 
+    public String getFormattedText() {
+        //returns formatted text, ie. paragraphs enclosed in <div>
+        String adjusted = text.replaceAll("(?m)^[ \t]*\r?\n", "</div>\n<div>");
+
+        return "<div>" + adjusted + "</div>";
+    }
+
     public void setText(String text) {
         this.text = text;
     }
@@ -113,6 +137,11 @@ public class Profile extends Content {
 
     public String getPrices() {
         return prices;
+    }
+
+    public String getFormatedPrices() {
+        //returns formatted text (\n replaced by <br/>)
+        return prices.replaceAll("(?m)\r?\n", "<br/>\n");
     }
 
     public void setPrices(String prices) {
@@ -133,5 +162,13 @@ public class Profile extends Content {
 
     public void setProfileImg(String profileImg) {
         this.profileImg = profileImg;
+    }
+
+    public String getStaticMapImg() {
+        return staticMapImg;
+    }
+
+    public void setStaticMapImg(String staticMapImg) {
+        this.staticMapImg = staticMapImg;
     }
 }

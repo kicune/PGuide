@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>Seznam článků</title>
-    <link rel="stylesheet" type="text/css" href="/resources/admin.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/admin.css" />
 </head>
 <body>
 <div id="leftColumn">

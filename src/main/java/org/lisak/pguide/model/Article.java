@@ -38,6 +38,13 @@ public class Article extends Content {
         return text;
     }
 
+    public String getFormattedText() {
+        //returns formatted text, ie. paragraphs enclosed in <div>
+        String adjusted = text.replaceAll("(?m)^[ \t]*\r?\n", "</div>\n<div>");
+
+        return "<div>" + adjusted + "</div>";
+    }
+
     public void setText(String text) {
         this.text = text;
     }
@@ -48,10 +55,6 @@ public class Article extends Content {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void save() {
-
     }
 
     public static Comparator<Article> TitleComparator = new Comparator<Article>() {

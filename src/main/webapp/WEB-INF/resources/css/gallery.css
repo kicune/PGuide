@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+
+#gallery {
+	border: 1px solid #C8C8C8;
+	width: 352px;
+	padding: 0px 0px 0px 0px;
+	height: 150px;
+	white-space: nowrap;
+}
+
+div.imgHolder {
+	background-color: #C8C8C8;
+	display: inline-block;
+	padding: 0px;
+	margin-left: 3px;
+	margin-right: 3px;
+	margin-bottom: 3px;
+}
+
+div.lightbox {
+   padding: 3px 3px 0px 3px;
+   border: 1px solid black;
+   background-color: white;
+}
+
+div.lightbox > div.close {
+	background-color: white;
+	background-image: url('../img/close.png');
+	background-repeat: no-repeat;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	cursor: pointer;
+	border: 1px solid black;
+	margin: 2px 2px 0px 2px;
+	padding: 0px;
+}
+
+div.galleryArrowLeft {
+	position: absolute;
+	width: 47px;
+	height: 150px;
+	z-index: 999;
+	background-image: url('../img/gallery_nav.png');
+	background-repeat: no-repeat;
+}
+
+div.galleryArrowRight {
+	position: absolute;
+	width: 47px;
+	height: 150px;
+	z-index: 999;
+	background-image: url('../img/gallery_nav.png');
+	background-repeat: no-repeat;
+	background-position: -47px 0px;
+}

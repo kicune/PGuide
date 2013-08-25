@@ -13,7 +13,7 @@
 <html>
 <head>
     <title>Seznam obrázků</title>
-    <link rel="stylesheet" type="text/css" href="/resources/admin.css" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/admin.css" />
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
 </head>
 <body>
@@ -43,8 +43,10 @@
     <sf:form modelAttribute="image" method="POST" action="/admin/image" enctype="multipart/form-data" acceptcharset="UTF-8">
         <div>ID:</div>
         <div><sf:input path="id" /></div>
-        <div>Popisek:</div>
-        <div><sf:input path="caption"/></div>
+
+       <!-- <div>Popisek:</div>
+        <div><sf:input path="caption"/></div> -->
+
         <div>Obrázek:</div>
         <div><input name="imageData" type="file"></div>
         <c:if test="${not empty image.id}">

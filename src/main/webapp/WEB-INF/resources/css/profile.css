@@ -1,0 +1,77 @@
+@CHARSET "UTF-8";
+/** PROFILE **/
+
+div.profile {
+	background-color: white;
+	width: 390px;
+	float: right;
+	position: relative;
+	border: 1px solid #cdcdcd;
+}
+
+
+#closeProfile {
+	float: right;
+	border: 1px solid black;
+	width: 15px;
+	height: 13px;
+	padding-top: 0px;
+	padding-bottom: 6px;
+	margin-right: 6px;
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+#closeProfile:hover {
+	background-color: black;
+	color: white;
+}
+
+#profileBody {
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+#profileBody h1 {
+	padding-top: 0px;
+	padding-bottom: 7px;
+	margin: 0px;
+	font-size: 24px;
+}
+
+#profileBody div {
+}
+
+#profileImg {
+	padding-right: 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 3px;
+	float: right;
+	border: 1px solid #cdcdcd;
+	
+}
+
+#profileMap {
+	margin-top: 6px;
+}
+
+#profileMap img {
+	border: 1px solid #cdcdcd;
+}
+
+#openingHours td {
+	padding-top: 1px;
+}
+
+
+#galleria{ 
+	width: 370px; 
+	height: 200px; 
+	background-color: white;
+}	
+	
+img.attribute {
+}	 
