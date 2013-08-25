@@ -48,7 +48,7 @@
      ${profile.formattedText}
 
      <div id='profileMap'>
-         <a class='mapLink' href="FIXME"><img src="/image/${profile.staticMapImg}"></a>
+         <a class='mapLink' href="${profile.id}"><img src="/image/${profile.staticMapImg}"></a>
      </div>
 
      <div id="gallery">

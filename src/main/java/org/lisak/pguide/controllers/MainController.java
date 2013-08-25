@@ -55,7 +55,7 @@ public class MainController {
     }
 
     //returns JSON via ResponseBody annotation
-    @RequestMapping(value = "/poi.json")
+    @RequestMapping(value="/poi.json", method = RequestMethod.GET)
     public @ResponseBody List<MapMarkersCategory>  getMapJson() {
         List<MapMarkersCategory> mapMarkersCategoryList = new ArrayList<MapMarkersCategory>();
 
@@ -63,12 +63,22 @@ public class MainController {
         for(Category c : categoryFactory.getCategoryList()) {
             //get all profiles for a category
             MapMarkersCategory mmc = new MapMarkersCategory();
+            mmc.setCategoryName(c.getName());
+            mmc.setIcon(c.getIconUrl());
             List<Profile> profileList = contentDao.getProfiles(c.getId());
-            for(Profile profile : profileList) {
-                mmc.addItem(profile);
+            if(profileList.size()>0) {
+                for(Profile profile : profileList) {
+                    mmc.addItem(profile);
+                }
+                mapMarkersCategoryList.add(mmc);
             }
-            mapMarkersCategoryList.add(mmc);
         }
+
         return mapMarkersCategoryList;
+    }
+
+    @RequestMapping(value="/map", method = RequestMethod.GET)
+    public String showMap() {
+        return "showMap";
     }
 }

@@ -1,6 +1,7 @@
 package org.lisak.pguide.model;
 
 import com.googlecode.objectify.annotation.EntitySubclass;
+import com.googlecode.objectify.annotation.Index;
 import geo.gps.Coordinates;
 
 import java.text.DecimalFormat;
@@ -22,7 +23,7 @@ public class Profile extends Content {
     private String address;
     private String perex;
     private String text;
-    private String category;
+    @Index private String category;
     private String prices;
     private ProfileAttributes attributes;
     private String profileImg;

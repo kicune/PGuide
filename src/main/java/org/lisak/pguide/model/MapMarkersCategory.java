@@ -17,18 +17,8 @@ public class MapMarkersCategory {
     private String icon;
     private ArrayList<MapMarker> items;
 
-    private class MapMarker {
-        private String lat;
-        private String lng;
-        private String name;
-        private String title;
-
-        private MapMarker(String lat, String lng, String name, String title) {
-            this.lat = lat;
-            this.lng = lng;
-            this.name = name;
-            this.title = title;
-        }
+    public MapMarkersCategory() {
+        this.items = new ArrayList<MapMarker>();
     }
 
     public String getCategoryName() {

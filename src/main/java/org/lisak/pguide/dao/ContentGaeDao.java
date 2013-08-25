@@ -74,7 +74,7 @@ public class ContentGaeDao implements ContentDao {
 
     @Override
     public List<Profile> getProfiles(String categoryId) {
-        return ofy().load().type(Profile.class).filter("categoryID", categoryId).list();
+        return ofy().load().type(Profile.class).filter("category", categoryId).list();
     }
 
     @Override
