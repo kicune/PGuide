@@ -18,6 +18,7 @@ import java.util.List;
 public class Profile extends Content {
     private String name;
     private String url;
+    private Boolean urlCzechOnly;
     private String gpsCoords;
     private List<DayOpeningHours> openingHours;
     private String address;
@@ -171,5 +172,13 @@ public class Profile extends Content {
 
     public void setStaticMapImg(String staticMapImg) {
         this.staticMapImg = staticMapImg;
+    }
+
+    public Boolean getUrlCzechOnly() {
+        return urlCzechOnly;
+    }
+
+    public void setUrlCzechOnly(Boolean urlCzechOnly) {
+        this.urlCzechOnly = urlCzechOnly;
     }
 }

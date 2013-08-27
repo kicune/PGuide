@@ -25,10 +25,24 @@ import java.util.List;
  */
 @Controller
 public class MainController {
-    @Autowired
-    ContentDao contentDao;
-    @Autowired
-    CategoryFactory categoryFactory;
+    private ContentDao contentDao;
+    private CategoryFactory categoryFactory;
+
+    public CategoryFactory getCategoryFactory() {
+        return categoryFactory;
+    }
+
+    public void setCategoryFactory(CategoryFactory categoryFactory) {
+        this.categoryFactory = categoryFactory;
+    }
+
+    public ContentDao getContentDao() {
+        return contentDao;
+    }
+
+    public void setContentDao(ContentDao contentDao) {
+        this.contentDao = contentDao;
+    }
 
     @RequestMapping(value = "/image/{imageId}", method = RequestMethod.GET)
     public void showImage(@PathVariable("imageId") String imageId, HttpServletResponse response) throws IOException {
@@ -63,7 +77,7 @@ public class MainController {
         for(Category c : categoryFactory.getCategoryList()) {
             //get all profiles for a category
             MapMarkersCategory mmc = new MapMarkersCategory();
-            mmc.setCategoryName(c.getName());
+            mmc.setCategoryName(c.getId());
             mmc.setIcon(c.getIconUrl());
             List<Profile> profileList = contentDao.getProfiles(c.getId());
             if(profileList.size()>0) {
@@ -80,5 +94,13 @@ public class MainController {
     @RequestMapping(value="/map", method = RequestMethod.GET)
     public String showMap() {
         return "showMap";
+    }
+
+    @RequestMapping(value="/", method = RequestMethod.GET)
+    public String showMain(Model model) {
+        Article article = (Article)contentDao.get("main");
+        model.addAttribute(article);
+        model.addAttribute("showRaw", true);
+        return "showArticle";
     }
 }

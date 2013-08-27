@@ -29,7 +29,7 @@ function onClickMarker(marker) {
 	return function() {
 		console.log("Marker: " + marker.profile + " clicked.");
 		toggleIcon(marker);
-		$('#profileBody').load('/profiles/' + marker.profile + '.html', function() {
+		$('#profileBody').load('/profile/' + marker.profile, function() {
 			//when the new profile loads...
 			
 			//register mapLink callback for new profile
@@ -50,14 +50,15 @@ function onClickMapLink(event) {
 	//...and scroll to the top
 	$(document).scrollTop(0);
 	showMap();
-	highlightMarker($(this).attr('href'));
+    //take only the last part of the URL - it's the marker code
+	highlightMarker($(this).attr('href').replace(/^.*[\/]/, ""));
 }
 
 //prepare markers in the format suitable for map set-up
 function prepareMarkers(markerData) {
 	var marker;
 	
-	$.each(markerData.categories, function(_k, category) {
+	$.each(markerData, function(_k, category) {
 		$.each(category.items, function(_k, mData) {
 			marker = new google.maps.Marker({
 				position:  new google.maps.LatLng(mData.lat, mData.lng),
@@ -151,7 +152,7 @@ function showMap() {
 			var filterId = $(this).attr("id");
 			
 			filterMarkers(filterId, filterValue);
-			//console.log("Filter: " + $(this).attr("id") + " clicked, new value: " + this.checked);
+			console.log("Filter: " + $(this).attr("id") + " clicked, new value: " + this.checked);
 		});
 		
 		
@@ -179,7 +180,7 @@ function hideMap() {
 
 $(document).ready(function() {
 	//first, get POI JSON loaded & parsed.
-	$.getJSON("../map/poi.json", function(data) {
+	$.getJSON("/poi.json", function(data) {
 		//prepare map configuration
 		prepareMapOptions();
 		//prepare hashMap of markers

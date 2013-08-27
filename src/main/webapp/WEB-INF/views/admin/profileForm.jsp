@@ -111,7 +111,7 @@
     </div>
 
     <div>URL:</div>
-    <div><sf:input path="url"/></div>
+    <div><sf:input path="url"/> <sf:checkbox path="urlCzechOnly" style='width: 20px'/> Jen česky</div>
 
     <div>GPS:</div>
     <div><sf:input path="gpsCoords"/></div>

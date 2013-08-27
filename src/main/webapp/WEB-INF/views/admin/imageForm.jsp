@@ -15,6 +15,18 @@
     <title>Seznam obrázků</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/admin.css" />
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <script src="/resources/js/jquery-1.9.1.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $("#imageData").change(function() {
+                var _filename = $('#imageData').val().replace(/^.*[\\\/]/, '');
+                _filename = _filename.replace(/\..*/,'');
+                $("#id").val(_filename);
+            });
+        });
+    </script>
+
 </head>
 <body>
 <div id="leftColumn">
@@ -48,7 +60,7 @@
         <div><sf:input path="caption"/></div> -->
 
         <div>Obrázek:</div>
-        <div><input name="imageData" type="file"></div>
+        <div><input id="imageData" name="imageData" type="file"></div>
         <c:if test="${not empty image.id}">
             <div><img src="/image/${image.id}"></div>
         </c:if>

@@ -1,5 +1,8 @@
 package org.lisak.pguide.controllers;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import org.lisak.pguide.dao.ContentDao;
 import org.lisak.pguide.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -18,13 +22,27 @@ import java.util.List;
  * Date: 06.08.13
  * Time: 13:59
  */
- @Controller
- @RequestMapping("/admin")
+@Controller
+@RequestMapping("/admin")
 public class AdminController {
-    @Autowired
-    ContentDao contentDao;
-    @Autowired
-    CategoryFactory categoryFactory;
+    private ContentDao contentDao;
+    private CategoryFactory categoryFactory;
+
+    public CategoryFactory getCategoryFactory() {
+        return categoryFactory;
+    }
+
+    public void setCategoryFactory(CategoryFactory categoryFactory) {
+        this.categoryFactory = categoryFactory;
+    }
+
+    public ContentDao getContentDao() {
+        return contentDao;
+    }
+
+    public void setContentDao(ContentDao contentDao) {
+        this.contentDao = contentDao;
+    }
 
     // ******** Article upload & processing **********
     @RequestMapping(value = "/article/{articleId}", method = RequestMethod.GET)
@@ -49,7 +67,8 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/article", method = RequestMethod.GET)
-    public String newArticle(Model model) {
+    public String newArticle(HttpServletRequest req, Model model) {
+
         List<Article> articleList = contentDao.getArticles();
         model.addAttribute("articleList", articleList);
 

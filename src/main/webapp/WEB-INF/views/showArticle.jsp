@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,7 @@
 
 <div class='wrapper'>
 
-    <div id='topTitle'></div>
+    <a href="/" style="border-width: 0"><div id='topTitle'></div></a>
 
     <div id='profile' class='profile'>
         <div id='closeProfile'>x</div>
@@ -29,11 +30,10 @@
     </div>
 
     <article class='main'>
-        <div>TODO: breadcrumbs</div>
-
         <h1>${article.title}</h1>
 
-        ${article.formattedText}
+         ${showRaw ? article.text : article.formattedText}
+
 
     </article>
     <div id="map-canvas"></div>
@@ -41,9 +41,9 @@
 <div id='mapCustomControls'>
     <div id='closeMap' title="Close map and return to article">Close Map</div>
     <div id='filters'>
-        <div><input type='checkbox' class='markerFilter' id='Cafes' checked>Cafés</div>
-        <div><input type='checkbox' class='markerFilter' id='Pubs' checked>Pubs</div>
-        <div><input type='checkbox' class='markerFilter' id='Patisseries' checked>Patisseries</div>
+        <div><input type='checkbox' class='markerFilter' id='coffee' checked>Cafés</div>
+        <div><input type='checkbox' class='markerFilter' id='pub' checked>Pubs</div>
+        <div><input type='checkbox' class='markerFilter' id='patisserie' checked>Patisseries</div>
     </div>
 </div>
 

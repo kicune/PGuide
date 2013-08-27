@@ -10,7 +10,9 @@
 
      <div id='address'>${profile.address}</div>
      <div id='GPS'>${profile.formattedGpsCoords}</div>
-     <div id='externalURL'><a href='${profile.url}'>${profile.url}</a></div>
+     <div id='externalURL'><a href='${profile.url}'>${profile.url}</a>
+         <c:if test="${profile.urlCzechOnly}">(Czech only)</c:if>
+     </div>
 
      <img id='profileImg' src="/image/${profile.profileImg}" />
 
@@ -48,7 +50,7 @@
      ${profile.formattedText}
 
      <div id='profileMap'>
-         <a class='mapLink' href="${profile.id}"><img src="/image/${profile.staticMapImg}"></a>
+         <a class='mapLink' href="/profile/${profile.id}"><img src="/image/${profile.staticMapImg}"></a>
      </div>
 
      <div id="gallery">

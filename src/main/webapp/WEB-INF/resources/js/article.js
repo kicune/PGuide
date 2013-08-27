@@ -8,7 +8,7 @@ $(document).ready(function(){
 		$('a.mapLink').click(onClickMapLink);
 		
 	 	$('a.profileLoader').click(function(){
-         	$('#profileBody').load($(this).attr('href'), function() {
+         	$('#profileBody').load('/profile/' + $(this).attr('href'), function() {
          		
          		//when a new profile is loaded, re-register click event listener for all mapLink links
          		$('a.mapLink').click(onClickMapLink);
@@ -59,11 +59,12 @@ $(document).ready(function(){
 	
 	//hide profile at the beginning
 	$('#profile').hide();
-	
-	$("article.main img:even").wrap(function() {
+
+    //prettyprint all images in articles, except for those marked with .raw class
+	$("article.main img:even").not(".raw").wrap(function() {
 			return imgDesc($(this), 'article-even');
 	});
-	$("article.main img:odd").wrap(function() {
+	$("article.main img:odd").not(".raw").wrap(function() {
 		return imgDesc($(this), 'article-odd');
 	});
 });

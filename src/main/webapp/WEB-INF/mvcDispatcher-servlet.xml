@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <mvc:annotation-driven />
     <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" cache-period="0"/>
-    <context:component-scan base-package="org.lisak.pguide" />
+    <!-- <context:component-scan base-package="org.lisak.pguide.controllers" /> -->
+
+    <bean id="mainController" class="org.lisak.pguide.controllers.MainController">
+        <property name="contentDao" ref="contentDao" />
+        <property name="categoryFactory" ref="categoryFactory" />
+    </bean>
+
+    <bean id="adminController" class="org.lisak.pguide.controllers.AdminController">
+        <property name="contentDao" ref="contentDao" />
+        <property name="categoryFactory" ref="categoryFactory" />
+    </bean>
+
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
@@ -17,9 +27,8 @@
 
     <bean id="contentDao" class="org.lisak.pguide.dao.ContentGaeDao" />
 
-    <bean id="multipartResolver" class= "org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="1000000" />
-        <property name="maxInMemorySize" value="1000000"/>
+    <bean id="multipartResolver" class="org.gmr.web.multipart.GMultipartResolver">
+        <property name="maxUploadSize" value="1048576" />
     </bean>
 
     <!-- categories -->
@@ -47,6 +56,15 @@
                 <ref bean="coffeeCategory" />
                 <ref bean="pubCategory" />
                 <ref bean="patisCategory" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="adminFilter" class="org.lisak.pguide.controllers.AdminFilter">
+        <property name="allowedAccounts">
+            <list>
+                <value>honza.liska@gmail.com</value>
+                <value>hedvikaster@gmail.com</value>
             </list>
         </property>
     </bean>
