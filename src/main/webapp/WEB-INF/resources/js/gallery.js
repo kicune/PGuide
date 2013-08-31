@@ -71,20 +71,23 @@ function Gallery(id) {
 		this.showLightbox = function(img) {
 			console.log("Lightboxing " + img.attr('src'));
 			
-			$lightboxClose = $("<div class='close'></div>");
-			$lightboxWrapper = $("<div class='lightbox'></div>").append($lightboxClose);
-			
+
 			$lbImg = $(document.createElement("img")).attr('src', img.attr('src'));
+
+            $lightboxWrapper = $("<div class='lightbox'></div>");
 			$lbImg.on("load", function() {
-				$lightboxClose.offset({top: 5, left: this.width - $lightboxClose.width() -2});
+                $lightboxClose = $("<div class='close'></div>");
+
+                $lightboxWrapper.append($lightboxClose);
+                $lightboxWrapper.append($lbImg);
+
+                $lightboxClose.offset({top: 5, left: this.width - $lightboxClose.width() -20});
+
+                $lightboxWrapper.lightbox_me({
+                    centered: true,
+                    destroyOnClose: true
+                });
 			});
-			
-			$lightboxWrapper.append($lbImg);
-			
-			$lightboxWrapper.lightbox_me({
-				centered: true
-			});
-			
 		};
 		
 		this.arrowHoverIn = function(event) {
