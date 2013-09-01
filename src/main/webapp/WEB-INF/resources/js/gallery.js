@@ -89,7 +89,8 @@ function Gallery(id) {
                 });
 			});
 		};
-		
+
+
 		this.arrowHoverIn = function(event) {
 			$(this).fadeTo('normal', 1);
 		};
