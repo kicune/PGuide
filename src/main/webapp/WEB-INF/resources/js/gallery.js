@@ -105,6 +105,7 @@ function Gallery(id) {
 		this.$holder = $(this.galleryId);
 		this.$holder.css("overflow","hidden")
 					.css("position", "relative");
+        this.$holder.hide();
 		
 		//store images in imgList
 		_list = $(this.galleryId + ' > img' );
@@ -162,13 +163,17 @@ function Gallery(id) {
 			$(d).addClass("imgHolder")
 				.height(gallery.$holder.innerHeight());
 			gallery.wrapper.append(d);
-			
+
 			$(d).append(img);
 			img.height(gallery.$holder.innerHeight());
+            img.hide();
 			
 			img.on("load", function() {
+                img.show();
 				//as soon as the first img is loaded, we will set up leading space:
 				if(i==0) {
+                    //disable gallery when there are no pictures in it
+                    gallery.$holder.show();
 					_offset = gallery.$holder.width() /2 -  
 					$(this).parent().outerWidth(true)/2;
 					gallery.wrapper.css({left: _offset + "px"});

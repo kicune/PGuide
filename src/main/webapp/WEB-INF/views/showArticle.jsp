@@ -21,8 +21,8 @@
 <body>
 
 <div class='wrapper'>
-
     <a href="/" style="border-width: 0"><div id='topTitle'></div></a>
+
 
     <div id='profile' class='profile'>
         <div id='closeProfile'>x</div>
@@ -30,6 +30,11 @@
     </div>
 
     <article class='main'>
+        <c:if test="${not showRaw}">
+            <div class="breadcrumbs">${article.breadcrumbs}</div>
+        </c:if>
+
+
         <h1>${article.title}</h1>
 
          ${showRaw ? article.text : article.formattedText}

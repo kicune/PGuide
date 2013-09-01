@@ -23,15 +23,23 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 public class Article extends Content {
     @Index String title;
     String text;
+    //parent is used for breadcrumb navigation & should be set to Id of parent article
+    String parent;
+        //At the moment, parents of all articles are set to "main"
+        //if the need for more complex parent/child structure arise, this will be changed
+        //probably with recursion in mind
+
 
     public Article() {
         super();
+        this.parent = "main";
     }
 
     public Article(String id, String title, String text) {
         super(id);
         this.title = title;
         this.text = text;
+        this.parent = "main";
     }
 
     public String getText() {
@@ -66,4 +74,17 @@ public class Article extends Content {
 
 
     };
+
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
+
+    public String getBreadcrumbs() {
+        return "<a href='/'>Main</a> &gt; <a href='/article/" +
+                getId() + "'>" + getTitle() + "</a>";
+    }
 }

@@ -54,6 +54,12 @@ public class MainController {
         IOUtils.copy(bis, response.getOutputStream());
     }
 
+    //empty image leads to fix-me img.
+    @RequestMapping(value = "/image/", method = RequestMethod.GET)
+    public void showFixme(HttpServletResponse response) throws  IOException {
+        showImage("fixme", response);
+    }
+
     @RequestMapping(value="/article/{articleId}", method = RequestMethod.GET)
     public String showArticle(@PathVariable("articleId") String articleId, Model model) {
         Article article = (Article)contentDao.get(articleId);
