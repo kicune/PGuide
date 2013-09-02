@@ -13,7 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Formatter;
 import java.util.List;
 
 /**
@@ -193,5 +195,60 @@ public class AdminController {
         contentDao.save(profile);
 
         return "redirect:/admin/profile/" + profile.getId();
+    }
+
+    @RequestMapping(value = "/emptyreport", method = RequestMethod.GET)
+    public String emptyValueReport(Model model) {
+        Formatter fm = new Formatter();
+        List<String> resultList = new ArrayList<String>();
+        List<Article> articleList = contentDao.getArticles();
+        for(Article a:articleList) {
+            if(a.getTitle() == null || a.getTitle().equals("")) {
+                resultList.add(String.format("Article id %s: empty title", a.getId()).toString());
+            }
+            if(a.getText() == null || a.getText().equals("")) {
+                resultList.add(String.format("Article id %s: empty text", a.getId()));
+            }
+        }
+
+        for(Profile p: contentDao.getProfiles()) {
+            if(p.getName() == null || p.getName().equals("")) {
+                resultList.add(String.format("Profile id %s: empty name", p.getId()));
+            }
+            if(p.getUrl() == null || p.getUrl().equals("")) {
+                resultList.add(String.format("Profile id %s: empty url", p.getId()));
+            }
+            if(p.getGpsCoords() == null || p.getGpsCoords().replaceAll("[0. ]","").equals("")) {
+                resultList.add(String.format("Profile id %s: empty GPS coords", p.getId()));
+            }
+            if(p.getAddress() == null || p.getAddress().equals("")) {
+                resultList.add(String.format("Profile id %s: empty address", p.getId()));
+            }
+            if(p.getOpeningHours() == null || p.getOpeningHours().size() == 0 ||
+                    p.getOpeningHours().get(0) == null || p.getOpeningHours().get(0).getMorning().equals("")) {
+                resultList.add(String.format("Profile id %s: empty opening hours", p.getId()));
+            }
+            if(p.getPrices() == null || p.getPrices().equals("")) {
+                resultList.add(String.format("Profile id %s: empty prices", p.getId()));
+            }
+            if(p.getProfileImg() == null || p.getProfileImg().equals("")) {
+                resultList.add(String.format("Profile id %s: empty profile image", p.getId()));
+            }
+            if(p.getStaticMapImg() == null || p.getStaticMapImg().equals("")) {
+                resultList.add(String.format("Profile id %s: empty static map image", p.getId()));
+            }
+            if(p.getProfileImg() == null || p.getProfileImg().equals("")) {
+                resultList.add(String.format("Profile id %s: empty profile image", p.getId()));
+            }
+            if(p.getGallery() == null || p.getGallery().size() == 0) {
+                resultList.add(String.format("Profile id %s: empty image gallery", p.getId()));
+            }
+            if(p.getText() == null || p.getText().equals("")) {
+                resultList.add(String.format("Profile id %s: empty text", p.getId()));
+            }
+        }
+
+        model.addAttribute("emptyValueList", resultList);
+        return "admin/emptyValueReport";
     }
 }
