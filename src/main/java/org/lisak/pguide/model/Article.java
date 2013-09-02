@@ -88,7 +88,7 @@ public class Article extends Content {
     public String getBreadcrumbs() {
         Article _parent;
         Formatter _f = new Formatter();
-        if(getParent() == null) {
+        if(getParent() == null || getParent().equals("")) {
             return "<a href='/'>Main</a> &gt; " + _f.format("<a href='/article/%s'>%s</a>", this.getId(), this.getTitle());
         } else {
             //fetch parent entity - yes, I know this is ugly and dao-specific...
