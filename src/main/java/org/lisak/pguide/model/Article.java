@@ -5,11 +5,13 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.EntitySubclass;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import org.lisak.pguide.dao.ContentGaeDao;
 import org.lisak.pguide.exceptions.NoSuchEntity;
 
 import javax.security.auth.Subject;
 
 import java.util.Comparator;
+import java.util.Formatter;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
@@ -24,22 +26,22 @@ public class Article extends Content {
     @Index String title;
     String text;
     //parent is used for breadcrumb navigation & should be set to Id of parent article
+    //if parent == null, article with id "main" is the parent
     String parent;
-        //At the moment, parents of all articles are set to "main"
-        //if the need for more complex parent/child structure arise, this will be changed
-        //probably with recursion in mind
-
 
     public Article() {
         super();
-        this.parent = "main";
     }
 
     public Article(String id, String title, String text) {
+        this(id, title, text, null);
+    }
+
+    public Article(String id, String title, String text, String parent) {
         super(id);
         this.title = title;
         this.text = text;
-        this.parent = "main";
+        this.parent = parent;
     }
 
     public String getText() {
@@ -84,7 +86,15 @@ public class Article extends Content {
     }
 
     public String getBreadcrumbs() {
-        return "<a href='/'>Main</a> &gt; <a href='/article/" +
-                getId() + "'>" + getTitle() + "</a>";
+        Article _parent;
+        Formatter _f = new Formatter();
+        if(getParent() == null) {
+            return "<a href='/'>Main</a> &gt; " + _f.format("<a href='/article/%s'>%s</a>", this.getId(), this.getTitle());
+        } else {
+            //fetch parent entity - yes, I know this is ugly and dao-specific...
+            _parent = (Article) ContentGaeDao.getStaticDao().get(getParent());
+            //get parent entity's breadcrumbs & append it to the result
+            return _parent.getBreadcrumbs() + " &gt; " + _f.format("<a href='/article/%s'>%s</a>", this.getId(), this.getTitle());
+        }
     }
 }

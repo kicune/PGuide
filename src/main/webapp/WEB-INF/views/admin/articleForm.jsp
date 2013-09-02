@@ -13,6 +13,7 @@
 <head>
     <title>Seznam článků</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/admin.css" />
+
 </head>
 <body>
 <div id="leftColumn">
@@ -38,6 +39,10 @@
     <div><sf:input path="id" /></div>
     <div>Titulek:</div>
     <div><sf:input path="title"/></div>
+    <c:if test="${article.id != 'main'}">
+        <div>ID nadřazeného článku (když zůstané prázdné, patří článek přímo pod titulní stránku):</div>
+        <div><sf:input path="parent"/></div>
+    </c:if>
     <div>Článek:</div>
     <div><sf:textarea path="text" /></div>
     <div style='text-align: right'>

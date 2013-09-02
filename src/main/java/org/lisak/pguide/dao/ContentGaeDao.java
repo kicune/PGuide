@@ -21,12 +21,19 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
  */
 @Entity
 public class ContentGaeDao implements ContentDao {
+    private static ContentGaeDao staticDao;
+
+    public static ContentGaeDao getStaticDao() {
+        return staticDao;
+    }
 
     public ContentGaeDao() {
         ObjectifyService.register(Content.class);
         ObjectifyService.register(Article.class);
         ObjectifyService.register(Image.class);
         ObjectifyService.register(Profile.class);
+
+        staticDao = this;
     }
 
     //loads article from datastore

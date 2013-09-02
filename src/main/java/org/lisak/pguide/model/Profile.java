@@ -78,7 +78,9 @@ public class Profile extends Content {
 
         StringBuilder sb = new StringBuilder();
         Formatter fmt = new Formatter(sb);
-        fmt.format("%1$s %2$s", coords.getLatitude(), coords.getLongitude());
+        DecimalFormat df = new DecimalFormat("#.00000");
+
+        fmt.format("%1$s %2$s", df.format(coords.getLatitude()), df.format(coords.getLongitude()));
         this.gpsCoords = fmt.toString();
     }
 
