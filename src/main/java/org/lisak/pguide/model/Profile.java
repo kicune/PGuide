@@ -74,7 +74,12 @@ public class Profile extends Content {
         //parse and normalize gps coords to decimal form
         //it is not possible to store Coordinates directly with Objectify
         Coordinates coords = new Coordinates();
-        coords.parse(strCoords);
+        //remove NE completely - it fucks with the default format
+        String _buf =  strCoords.replaceAll("[NE]", "");
+        //replace all chars except for [0-9,.] with spaces
+        _buf = _buf.replaceAll("[^\\d,.]", " ");
+
+        coords.parse(_buf);
 
         StringBuilder sb = new StringBuilder();
         Formatter fmt = new Formatter(sb);
