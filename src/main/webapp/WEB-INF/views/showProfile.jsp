@@ -14,7 +14,9 @@
          <c:if test="${profile.urlCzechOnly}">(Czech only)</c:if>
      </div>
 
-     <img id='profileImg' src="/image/${profile.profileImg}" />
+     <c:if test="${profile.profileImg != ''}">
+        <img id='profileImg' src="/image/${profile.profileImg}" />
+     </c:if>
 
      <div id='openingHours'>
          <strong>Opening hours:</strong>

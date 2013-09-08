@@ -204,47 +204,46 @@ public class AdminController {
         List<Article> articleList = contentDao.getArticles();
         for(Article a:articleList) {
             if(a.getTitle() == null || a.getTitle().equals("")) {
-                resultList.add(String.format("Article id %s: empty title", a.getId()).toString());
+                resultList.add(String.format("Article id <a href='/admin/article/%s'>%s</a>: empty title", a.getId(), a.getId()));
             }
             if(a.getText() == null || a.getText().equals("")) {
-                resultList.add(String.format("Article id %s: empty text", a.getId()));
+                resultList.add(String.format("Article id <a href='/admin/article/%s'>%s</a>: empty text", a.getId(), a.getId()));
             }
         }
 
         for(Profile p: contentDao.getProfiles()) {
             if(p.getName() == null || p.getName().equals("")) {
-                resultList.add(String.format("Profile id %s: empty name", p.getId()));
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty name", p.getId(), p.getId()));
             }
             if(p.getUrl() == null || p.getUrl().equals("")) {
-                resultList.add(String.format("Profile id %s: empty url", p.getId()));
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty url", p.getId(), p.getId()));
             }
             if(p.getGpsCoords() == null || p.getGpsCoords().replaceAll("[0. ]","").equals("")) {
-                resultList.add(String.format("Profile id %s: empty GPS coords", p.getId()));
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty GPS coords", p.getId(), p.getId()));
             }
             if(p.getAddress() == null || p.getAddress().equals("")) {
-                resultList.add(String.format("Profile id %s: empty address", p.getId()));
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty address", p.getId(), p.getId()));
             }
-            if(p.getOpeningHours() == null || p.getOpeningHours().size() == 0 ||
-                    p.getOpeningHours().get(0) == null || p.getOpeningHours().get(0).getMorning().equals("")) {
-                resultList.add(String.format("Profile id %s: empty opening hours", p.getId()));
+            if(p.getOpeningHours() == null || p.getOpeningHours().size() == 0) {
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty opening hours", p.getId(), p.getId()));
             }
             if(p.getPrices() == null || p.getPrices().equals("")) {
-                resultList.add(String.format("Profile id %s: empty prices", p.getId()));
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty prices", p.getId(), p.getId()));
             }
             if(p.getProfileImg() == null || p.getProfileImg().equals("")) {
-                resultList.add(String.format("Profile id %s: empty profile image", p.getId()));
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty profile image", p.getId(), p.getId()));
             }
             if(p.getStaticMapImg() == null || p.getStaticMapImg().equals("")) {
-                resultList.add(String.format("Profile id %s: empty static map image", p.getId()));
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty static map image", p.getId(), p.getId()));
             }
             if(p.getProfileImg() == null || p.getProfileImg().equals("")) {
-                resultList.add(String.format("Profile id %s: empty profile image", p.getId()));
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty profile image", p.getId(), p.getId()));
             }
             if(p.getGallery() == null || p.getGallery().size() == 0) {
-                resultList.add(String.format("Profile id %s: empty image gallery", p.getId()));
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty image gallery", p.getId(), p.getId()));
             }
             if(p.getText() == null || p.getText().equals("")) {
-                resultList.add(String.format("Profile id %s: empty text", p.getId()));
+                resultList.add(String.format("Profile id <a href='/admin/profile/%s'>%s</a>: empty text", p.getId(), p.getId()));
             }
         }
 
