@@ -20,6 +20,7 @@
     <script src="/resources/js/jquery-ui-1.10.3.custom.js"></script>
 
     <script>
+        //prepare content for autocomplete fields
         $(function() {
             var availableTags = ${strImgList};
 
@@ -74,6 +75,20 @@
 
             });
         });
+
+        //process request for static map generation
+        $(function() {
+            $("#createStaticMap").click(function() {
+                //fetch GPS coords
+                var gps = $("#gpsCoords").val();
+                var mapId = $("#id").val() + "-map";
+                $.ajax({url:"/admin/createStaticMap", type:"POST", data:{id:mapId, gps:gps}, success: function() {
+                    //on success, set id of the created image to the map field
+                    $("#staticMapImg").val(mapId);
+                }})
+            });
+
+        })
     </script>
 
 </head>
@@ -90,9 +105,7 @@
     <br>
     <div><a href="/admin/profile">Přidat nový profil</a></div>
 
-    <hr/>
-    <div><a href="/admin/article">Seznam článků</a></div>
-    <div><a href="/admin/image">Seznam obrázků</a></div>
+    <jsp:include page="links.jsp" />
 </div>
 
 <div id="mainColumn">
@@ -149,10 +162,12 @@
     <div><sf:textarea path="prices" style="height: 50px"/></div>
 
     <div>Profilová fotka:</div>
-    <div><input name="profileImg" id="profileImg" value="${profile.profileImg}" style="width: 150px"/></div>
+    <div><input name="profileImg" id="profileImg" value="${profile.profileImg}" style="width: 150px"/> (max. 140px šířky)</div>
 
     <div>Statická mapka:</div>
-    <div><input name="staticMapImg" id="staticMapImg" value="${profile.staticMapImg}" style="width: 150px"/></div>
+    <div><input name="staticMapImg" id="staticMapImg" value="${profile.staticMapImg}" style="width: 150px"/>
+        <input type="button" name="createStaticMap" id="createStaticMap" style="width: 80px" value="Vytvoř mapu"/>
+    </div>
 
     <div>Galerie:</div>
     <div>

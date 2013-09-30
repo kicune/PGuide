@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="../resources/css/desktop-map.css" />
     <link rel="stylesheet" type="text/css" href="../resources/css/profile.css" />
     <script src="../resources/js/jquery-1.9.1.js"></script>
     <script type="text/javascript"

@@ -70,25 +70,23 @@ function Gallery(id) {
 		
 		this.showLightbox = function(img) {
 			console.log("Lightboxing " + img.attr('src'));
+			
 
-			var $lbImg = $(document.createElement("img")).attr('src', img.attr('src'));
-            $lbImg.addClass("lbImage");
+			$lbImg = $(document.createElement("img")).attr('src', img.attr('src'));
 
-            var $lightboxWrapper = $("<div class='lightbox'></div>");
-            $lightboxWrapper.hide();
-
+            $lightboxWrapper = $("<div class='lightbox'></div>");
 			$lbImg.on("load", function() {
+                $lightboxClose = $("<div class='close'></div>");
+
+                $lightboxWrapper.append($lightboxClose);
                 $lightboxWrapper.append($lbImg);
+
+                $lightboxClose.offset({top: 5, left: this.width - $lightboxClose.width() -20});
 
                 $lightboxWrapper.lightbox_me({
                     centered: true,
-                    destroyOnClose: true,
-                    closeSelector: ".lbImage"
+                    destroyOnClose: true
                 });
-
-                $lbImg.css("maxWidth", ($(window).width() - 20) + "px");
-                $lbImg.css("maxHeight", ($(window).height() - 20) + "px");
-                $lightboxWrapper.show();
 			});
 		};
 
@@ -134,7 +132,7 @@ function Gallery(id) {
 		
 		this.$arrowRight.css({
 			top: this.$holder.height()/2 - this.$arrowRight.outerHeight(true)/2,
-			left: this.$holder.width()-this.$arrowRight.outerWidth(true)-5,
+			left: this.$holder.width()-this.$arrowRight.outerWidth(true),
 			opacity: this.inactiveOpacity
 		});
 		
@@ -176,41 +174,26 @@ function Gallery(id) {
 				if(i==0) {
                     //disable gallery when there are no pictures in it
                     gallery.$holder.show();
-					var _offset = gallery.$holder.width() /2 -
+					_offset = gallery.$holder.width() /2 -  
 					$(this).parent().outerWidth(true)/2;
 					gallery.wrapper.css({left: _offset + "px"});
 					//set onclick handler for first image
 					img.on("click", function(){gallery.showLightbox(img);});
 					img.css("cursor", "pointer");
-				}
-
-                //refresh profileScroll width after image is loaded
-                if(profileScroll != null)
-                    profileScroll.refresh();
+				};
 			});
 
 		});
+			
 
+		
 		//set up click handlers for scroll buttons, but only after all images in wrapper element load 
 		//(so we know their widths for scrolling)
+		
 		//onLoad doesn't work for wrapper, only for $(window)
 		//$(window).on("load", function (){
-        if (Modernizr.touch) {
-            $('#gallerySwiper').swipe({
-                swipe:function(event, direction, distance, duration, fingerCount) {
-                    if(direction == 'right') {
-                        gallery.scrollRight();
-                    }
-
-                    if(direction == 'left') {
-                        gallery.scrollLeft();
-                    }
-                }
-            });
-        }
-
-        gallery.$arrowLeft.click(gallery.scrollRight);
-        gallery.$arrowRight.click(gallery.scrollLeft);
+			gallery.$arrowLeft.click(gallery.scrollRight);
+			gallery.$arrowRight.click(gallery.scrollLeft);
 		//});			
-}
+};
 

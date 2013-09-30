@@ -28,9 +28,7 @@
     <br>
     <div><a href="/admin/article">Přidat nový článek</a></div>
 
-    <hr/>
-    <div><a href="/admin/profile">Seznam profilů</a></div>
-    <div><a href="/admin/image">Seznam obrázků</a></div>
+    <jsp:include page="links.jsp" />
 </div>
 
 <div id="mainColumn">

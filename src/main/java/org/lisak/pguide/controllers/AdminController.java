@@ -3,20 +3,32 @@ package org.lisak.pguide.controllers;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import geo.gps.Coordinates;
 import org.lisak.pguide.dao.ContentDao;
 import org.lisak.pguide.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Formatter;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +39,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+    private static final Logger log = Logger.getLogger(AdminController.class.getName());
+
     private ContentDao contentDao;
     private CategoryFactory categoryFactory;
 
@@ -195,6 +209,63 @@ public class AdminController {
         contentDao.save(profile);
 
         return "redirect:/admin/profile/" + profile.getId();
+    }
+
+    @RequestMapping(value = "/createStaticMap", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void createStaticMap(@ModelAttribute("id") String id,
+                                @ModelAttribute("gps") String gps,
+                                HttpServletResponse response) throws IOException {
+        String staticMapURL = "http://maps.googleapis.com/maps/api/staticmap?";
+        String staticMapParams = "zoom=15&size=318x126&sensor=false&" +
+                "visual_refresh=true&markers=icon:http://www.pguide.cz/resources/img/coffee-selected.png%%7C%s,%s";
+
+        //parameters: id, long, lat
+        //called via AJAX/jquery from edit profile page
+        // - creates new static google map from specified coordinates
+        // - uploads the resulting map to DB as image with ID "{id}-map"
+        //returns HTTP 200 when successful
+
+        //** prepare URL **
+        //parse GPS (it may not be normalized by servlet yet)
+        //FIXME: this should be moved to geo.gps
+        Coordinates coords = new Coordinates();
+        //remove NE completely - it fucks with the default format
+        String _buf =  gps.replaceAll("[NE]", "");
+        //replace all chars except for [0-9,.] with spaces
+        _buf = _buf.replaceAll("[^\\d,.]", " ");
+
+        coords.parse(_buf);
+
+        StringBuilder sb = new StringBuilder();
+        DecimalFormat df = new DecimalFormat("#.00000");
+
+        String _fillParams = String.format(staticMapParams,
+                df.format(coords.getLatitude()),
+                df.format(coords.getLongitude()));
+
+        URL url = new URL(staticMapURL + _fillParams);
+
+        log.info("Static map URL: " + url.toString());
+
+        //fetch static google image
+        InputStream in = new BufferedInputStream(url.openStream());
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        int n;
+        while (-1!=(n=in.read(buf)))
+        {
+            out.write(buf, 0, n);
+        }
+        out.close();
+        in.close();
+
+        //create & store new image
+        Image img = new Image();
+        img.setId(id);
+        img.setData(out.toByteArray());
+        img.setFileType("jpg");
+        contentDao.save(img);
     }
 
     @RequestMapping(value = "/emptyreport", method = RequestMethod.GET)

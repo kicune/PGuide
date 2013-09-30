@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<!--
+ main - hlavni stranka, sipky se nedaji zasunout
+ article - stranka s clankem, sipky jsou zasunute a pri vysunuti odsunou clanek doprava
+        // alternativa - pri sirce vetsi nez X jsou sipky nastalo vysunute (jako v main)
+profile - po kliknuti na profil se zprava vysune profil a odsune clanek i se sipkami doleva
+-->
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gentle Introduction to Prague</title>
+    <link rel='stylesheet' media='screen' href='../../resources/test/css/screen.css' />
+    <link rel='stylesheet' media='screen' href='../../resources/test/css/arrows.css' />
+    <link rel='stylesheet' media='screen and (max-width: 530px)' href='../../resources/test/css/low.css' />
+    <link rel='stylesheet' media='screen and (min-width: 531px)' href='../../resources/test/css/medium.css' />
+
+    <script type="text/javascript" src="../../resources/js/modernizr.custom.08112.js"></script>
+    <script type="text/javascript" src="../../resources/js/jquery-1.9.1.js"></script>
+
+    <script type="text/javascript">
+        $.ajaxSetup ({
+            cache: false
+        });
+
+        var arrowsVisible = true;
+        var ARROW_HEAD_WIDTH = 30;
+
+        //global variables for DIV container selectors
+        var $arrows; var $main;
+
+        function showArrows(resize) {
+            arrowsVisible = true;
+            $arrows.offset({left: 0});
+            $main.offset({left: $arrows.width()});
+            if(resize) {
+                $main.css('width', '67%');
+            }
+        }
+
+        //FIXME: window resize
+
+        function hideArrows(resize) {
+            //TODO: efektové!
+            arrowsVisible = false;
+            //FIXME? kdyz se provede resize, tak se pevne nastavena
+            //sirka spatne scaluje. Neni moc resitelne vzhledem k tomu,
+            //ze sipky jsou nastavene na 30px pevne, ale neni moc dulezite -
+            //scalovani se pri zastrcenych sipkach moc casto asi provadet nebude
+            $main.offset({left: ARROW_HEAD_WIDTH});
+            $arrows.offset({left: ARROW_HEAD_WIDTH-$arrows.width() });
+            if(resize) {
+                $main.width($main.parent().width()-ARROW_HEAD_WIDTH);
+                console.log($main.width());
+            }
+        }
+
+        $(document).ready(function() {
+            $arrows = $('#arrows');
+            $main = $('#mainColumn');
+
+           $arrows.click(function() {
+              if(arrowsVisible) {
+                  hideArrows(true);
+                  console.log("Arrows hidden");
+              } else {
+                  showArrows(true);
+                  console.log("Arrows shown");
+              }
+           });
+        });
+    </script>
+</head>
+<body>
+
+    <div id="pageHeader"></div>
+
+    <div id="background"></div>
+
+     <div id="bodyWrapper">
+
+        <div id="arrows">
+            <div id="tasteArrow">
+                <div class="title">Taste of Prague</div>
+                <div class="arrowCategories">
+                    <div class="category">Pubs</div>
+                    <div class="category">Restaurants</div>
+                    <div class="category">Caffés</div>
+                    <div class="category">Patisseries</div>
+                    <div class="category">Wine bars</div>
+                </div>
+            </div>
+
+            <div id="storyArrow">
+                <div class="title">Story of Prague</div>
+                <div class="arrowCategories">
+                    <div class="category">Legends</div>
+                    <div class="category">Architecture</div>
+                    <div class="category">History</div>
+                </div>
+            </div>
+
+            <div id="lifeArrow">
+                <div class="title">Life in Prague</div>
+                <div class="arrowCategories">
+                    <div class="category">Transport</div>
+                    <div class="category">Lodging</div>
+                    <div class="category">Annoyances</div>
+                    <div class="category">Internet</div>
+                </div>
+            </div>
+
+            <div id="funArrow">
+                <div class="title">Fun in Prague</div>
+                <div class="arrowCategories">
+                    <div class="category">Geocaches</div>
+                    <div class="category">City walks</div>
+                    <div class="category">Surroundings</div>
+                    <div class="category">Museums &amp; Galleries</div>
+                </div>
+            </div>
+            
+        </div><div id="mainColumn">
+            <div id="article">
+                <div class="title">Welcome to Prague!</div>
+                <div>The City of Hundred Spires, Heart of Europe, Mother of all Cities... Sounds familiar? You have probably read dozens of such characteristics in guide books. But apart from these pompeous denominations - believe it or not - Prague is a great place to spend some time, whether several days or just a few hours. It is big enough to comprise almost anything, small enough to be went around on foot, reconstructed enough to be photogenic and old enough to be romantic.</div>
+                <div>You have plenty of chances to get to know anything you want to know about our city. Just try the first book shop you run into, its bookshelves will be flooded by Prague guide books. So why we decided to create another one? To be honest, the best and most reliable information we have ever got on our travels was not from guide books, but from local people. Real people living in the towns and cities, breathing their air, knowing their hidden places and co-creating their unique atmosphere.</div>
+                <div>We were not born in Prague, so our eyes are still not blind to its beauties, but we have spent here almost twenty years, which - we guess - authorizes us to account ourselves as quite well acquainted with the city. Sometimes our experience approves the official guides, sometimes it is slightly different and in some cases we have to disagree totally. Now, it is just up to you to plunge into Prague's narrow streets, discover this magnificent city by yourself and acquire an experience of your own. Well, look at the map - what would you like to try first?</div>
+            </div>
+        </div>
+
+        <div id="map">
+
+        </div>
+</div>
+
+</body>
+</html>

@@ -33,12 +33,23 @@ function onClickMarker(marker) {
             //when the new profile loads...
 
             //register mapLink callback for new profile
-            //$('a.mapLink').click(onClickMapLink);
+            $('a.mapLink').click(onClickMapLink);
             //align profile container on with the map & show the profile
-            showProfile();
-
+            $('#profile').css('top', 0).show();
         });
     };
+}
+
+function onClickMapLink(event) {
+    event.preventDefault();
+
+    //align profile container on with the map
+    $('#profile').css('top', 0);
+    //...and scroll to the top
+    $(document).scrollTop(0);
+    showMap();
+    //take only the last part of the URL - it's the marker code
+    highlightMarker($(this).attr('href').replace(/^.*[\/]/, ""));
 }
 
 //prepare markers in the format suitable for map set-up
@@ -119,7 +130,7 @@ function setupCustomControls() {
 }
 
 // create and show map (based on config stored in global vars.)
-function showMap(markerCode) {
+function showMap() {
     console.log("showMap called...");
     if (googleMap === null) {
         googleMap = new google.maps.Map($("#map-canvas")[0], mapOptions);
@@ -127,7 +138,6 @@ function showMap(markerCode) {
         $.each(markerMap, function (markerCode, marker) {
             marker.setMap(googleMap);
             google.maps.event.addListener(marker, 'click', onClickMarker(marker));
-            console.log("Marker " + marker.profile + " set up.");
         });
 
         console.log("Attaching custom controls...");
@@ -146,28 +156,22 @@ function showMap(markerCode) {
 
         //customControl is hidden initialy, show it now
         customControl.show(0);
-
-        if(markerCode)
-            highlightMarker(markerCode);
     }
 
     //hide article
-    $('#article').hide();
+    $('article.main').hide();
 
-    var $mapCanvas = $('#map-canvas');
+    var mapCanvas = $('#map-canvas');
 
     //show prepared map
-    $mapCanvas.show();
+    mapCanvas.show();
     //set map height ()
-    $mapCanvas.css('height', ($(window).height() - $('#pageHeader').height() - 10) + 'px');
-    //$mapCanvas.offset({left: 0, top: $('#pageHeader').height});
-    MAP_SHOWN = true;
+    mapCanvas.height($(window).height() - mapCanvas.position().top - 20);
 }
 
 function hideMap() {
     $('#map-canvas').hide();
-    $('#article').show();
-    MAP_SHOWN = false;
+    $('article.main').show();
 }
 
 /******* DocumentReady functions ******/

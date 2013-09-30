@@ -3,7 +3,6 @@ package org.lisak.pguide.controllers;
 import org.apache.commons.io.IOUtils;
 import org.lisak.pguide.dao.ContentDao;
 import org.lisak.pguide.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +15,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +27,7 @@ import java.util.List;
 public class MainController {
     private ContentDao contentDao;
     private CategoryFactory categoryFactory;
+    private static Logger logger = Logger.getLogger("MainController");
 
     public CategoryFactory getCategoryFactory() {
         return categoryFactory;
@@ -46,10 +47,8 @@ public class MainController {
 
     @RequestMapping(value = "/image/{imageId}", method = RequestMethod.GET)
     public void showImage(@PathVariable("imageId") String imageId, HttpServletResponse response) throws IOException {
-        //FIXME: allow different image types (png?)
         response.setContentType("image/jpeg");
         Image img = (Image)contentDao.get(imageId);
-        //FIXME: process errors (wrong ID)
         ByteArrayInputStream bis = new ByteArrayInputStream(img.getData());
         IOUtils.copy(bis, response.getOutputStream());
     }
@@ -67,10 +66,18 @@ public class MainController {
         return "showArticle";
     }
 
+    @RequestMapping(value="/article2/{articleId}", method = RequestMethod.GET)
+    public String showArticleV2(@PathVariable("articleId") String articleId, Model model) {
+        Article article = (Article)contentDao.get(articleId);
+        model.addAttribute(article);
+        return "showArticleV2";
+    }
+
     @RequestMapping(value="/profile/{profileId}", method = RequestMethod.GET)
     public String showProfile(@PathVariable("profileId") String profileId, Model model) {
         Profile profile = (Profile)contentDao.get(profileId);
         model.addAttribute(profile);
+        logger.info("Fetching profile " + profileId);
         return "showProfile";
     }
 
@@ -106,7 +113,14 @@ public class MainController {
     public String showMain(Model model) {
         Article article = (Article)contentDao.get("main");
         model.addAttribute(article);
-        model.addAttribute("showRaw", true);
-        return "showArticle";
+        model.addAttribute("isMain", true);
+        //model.addAttribute("showRaw", true);
+        return "showArticleV2";
+    }
+
+    /**** TESTING ****/
+    @RequestMapping(value="/test/article", method = RequestMethod.GET)
+    public String showTestArticle() {
+        return "/WEB-INF/views/test/article.html";
     }
 }

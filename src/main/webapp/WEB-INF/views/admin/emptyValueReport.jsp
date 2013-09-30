@@ -16,9 +16,8 @@
 </head>
 <body>
 <div id="leftColumn">
-    <div><a href="/admin/article">Seznam článků</a></div>
-    <div><a href="/admin/profile">Seznam profilů</a></div>
-    <div><a href="/admin/image">Seznam obrázků</a></div>
+    <h3>Kontrola prázdných polí</h3>
+    <jsp:include page="links.jsp" />
 </div>
 
 <div id="mainColumn">

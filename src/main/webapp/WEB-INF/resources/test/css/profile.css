@@ -1,15 +1,12 @@
 @CHARSET "UTF-8";
+/** PROFILE **/
 
-#profile {
+div.profile {
 	background-color: white;
-	width: 320px;
-	position: fixed;
-    background-color: rgba(255,255,255,0.5);
-    top: 3em;
-    /* hidden at the beginning*/
-    display: none;
-    overflow-y: auto;
-    overflow-x: hidden;
+	width: 390px;
+	float: right;
+	position: relative;
+	border: 1px solid #cdcdcd;
 }
 
 
@@ -21,7 +18,6 @@
 	padding-top: 0px;
 	padding-bottom: 6px;
 	margin-right: 6px;
-    margin-top: 6px;
 	font-weight: bold;
 	text-align: center;
 	cursor: pointer;
@@ -34,32 +30,28 @@
 }
 
 #profileBody {
+	padding-left: 12px;
+	padding-right: 12px;
 }
 
 #profileBody h1 {
+	padding-top: 0px;
 	padding-bottom: 7px;
-	margin: 0;
-	font-size: 20px;
-    padding-top: 6px
+	margin: 0px;
+	font-size: 24px;
+}
+
+#profileBody div {
 }
 
 #profileImg {
-	padding-right: 0;
+	padding-right: 0px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	margin-left: 3px;
 	float: right;
 	border: 1px solid #cdcdcd;
-    max-width: 140px;
 	
-}
-
-#profileDesc {
-}
-
-#profileWrapper {
-    padding-left: 12px;
-    padding-right: 12px;
 }
 
 #profileMap {
@@ -68,12 +60,18 @@
 
 #profileMap img {
 	border: 1px solid #cdcdcd;
-    width: 318px;
 }
 
 #openingHours td {
 	padding-top: 1px;
 }
 
+
+#galleria{ 
+	width: 370px; 
+	height: 200px; 
+	background-color: white;
+}	
+	
 img.attribute {
 }	 
