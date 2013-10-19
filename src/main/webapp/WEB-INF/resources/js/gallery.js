@@ -41,6 +41,7 @@ function Gallery(id) {
 			gallery.currentImgIdx += 1;
 			
 			//add onclick handler for new centered image
+            gallery.imgList[gallery.currentImgIdx].off('click');
 			gallery.imgList[gallery.currentImgIdx].on("click", function() {
 					gallery.showLightbox(gallery.imgList[gallery.currentImgIdx]);
 				}).css("cursor", "pointer");
@@ -62,6 +63,7 @@ function Gallery(id) {
 			
 			gallery.currentImgIdx -= 1;
 			//add onclick handler for new centered image
+            gallery.imgList[gallery.currentImgIdx].off('click');
 			gallery.imgList[gallery.currentImgIdx].on("click", function() {
 					gallery.showLightbox(gallery.imgList[gallery.currentImgIdx]);
 				}).css("cursor", "pointer");
@@ -76,6 +78,11 @@ function Gallery(id) {
 
             var $lightboxWrapper = $("<div class='lightbox'></div>");
             $lightboxWrapper.hide();
+
+
+            $lightboxWrapper.on("click", function() {
+                $lightboxWrapper.trigger('close');
+            });
 
 			$lbImg.on("load", function() {
                 $lightboxWrapper.append($lbImg);

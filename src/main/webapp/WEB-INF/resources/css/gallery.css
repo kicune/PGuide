@@ -3,7 +3,7 @@
 #gallery {
 	border: 1px solid #C8C8C8;
 	width: 308px;
-    margin-left: 12px;
+    /*margin-left: 12px;*/
 	height: 150px;
 	white-space: nowrap;
 }

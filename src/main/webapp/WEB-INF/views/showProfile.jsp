@@ -59,15 +59,16 @@
                 <a class='mapLink' href="/profile/${profile.id}"><img src="/image/${profile.staticMapImg}"></a>
             </div>
        </div>
-    </div>
 
-    <div id="gallerySwiper">
-        <div id="gallery">
-            <c:forEach var="imageId" items="${profile.gallery}">
-                <img src="/image/${imageId}">
-            </c:forEach>
+        <div id="gallerySwiper">
+            <div id="gallery">
+                <c:forEach var="imageId" items="${profile.gallery}">
+                    <img src="/image/${imageId}">
+                </c:forEach>
+            </div>
         </div>
     </div>
+
     <script>
         var gallery, profileScroll;
 
@@ -76,7 +77,9 @@
             gallery = new Gallery('#gallery');
 
             //instantiate iScroll for profile
-            profileScroll = new iScroll('profile');
+            profileScroll = new iScroll('profile', {
+                hideScrollbar: false
+            });
         });
     </script>
 </body>

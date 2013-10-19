@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="../resources/css/profile.css" />
+    <link rel="stylesheet" type="text/css" href="cl../resources/css/profile.css" />
     <script src="../resources/js/jquery-1.9.1.js"></script>
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOio8LeBNcJ0kYGA-sY274Crvvx7h05Ew&sensor=false">
