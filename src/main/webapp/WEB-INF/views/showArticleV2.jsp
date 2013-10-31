@@ -36,9 +36,12 @@ profile - po kliknuti na profil se zprava vysune profil a odsune clanek i se sip
 
     <script type="text/javascript">
         //additional arguments from controller to JS
-        var isMain = ${isMain ? "true" : "false" }
+        var isMain = ${isMain ? "true" : "false" };
+        var mapOnly = ${mapOnly ? "true" : "false" };
         //global flag to determine whether map is shown
         var MAP_SHOWN;
+
+        var profileScroll;
     </script>
 
 </head>

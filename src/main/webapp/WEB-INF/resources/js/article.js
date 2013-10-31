@@ -101,6 +101,15 @@ function showProfile() {
                 }
             }
         });
+
+        //instantiate iScroll for profile
+        if(profileScroll !== undefined) {
+            profileScroll.destroy();
+            profileScroll = null;
+        }
+        profileScroll = new iScroll('profile', {
+            hideScrollbar: false
+        });
     }
 
     //close profile when X button is clicked
@@ -154,8 +163,6 @@ $(document).ready(function(){
     ARROW_HEAD_WIDTH = 30;
     MAX_COLUMN_WIDTH = 640;
 
-    //article and map cannot be shown at once
-    MAP_SHOWN = false;
 
     //TODO: background - probably different background image for different aspect ratios
 

@@ -179,7 +179,15 @@ $(document).ready(function () {
         prepareMapOptions();
         //prepare hashMap of markers
         prepareMarkers(data);
+
+        //show map by default, if it is called by /map URL
+        if(mapOnly) {
+            showMap();
+            MAP_SHOWN = true;
+        } else {
+            MAP_SHOWN = false;
+        }
     });
-});	
+});
 
 

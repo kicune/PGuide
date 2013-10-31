@@ -75,11 +75,6 @@
         /**** DocumentReady functions ****/
         $(document).ready(function(){
             gallery = new Gallery('#gallery');
-
-            //instantiate iScroll for profile
-            profileScroll = new iScroll('profile', {
-                hideScrollbar: false
-            });
         });
     </script>
 </body>

@@ -105,8 +105,9 @@ public class MainController {
     }
 
     @RequestMapping(value="/map", method = RequestMethod.GET)
-    public String showMap() {
-        return "showMap";
+    public String showMap(Model model) {
+        model.addAttribute("mapOnly", true);
+        return "showArticleV2";
     }
 
     @RequestMapping(value="/", method = RequestMethod.GET)

@@ -1,7 +1,7 @@
 
 function Gallery(id) {
 		var gallery = this;
-	
+
 		//string with id of the gallery node
 		this.galleryId = id;
 		//array of jquery IMG nodes
@@ -17,11 +17,18 @@ function Gallery(id) {
 		//navigation elements
 		this.arrowLeft = null;
 		this.arrowRight = null;
+
+        this.lightboxShown = false;
 		
 		//opacity value for inactive arrows
 		this.inactiveOpacity = 0.3;
 		
 		/*** Gallery functions ***/
+
+        this.lightboxClick = function() {
+            gallery.showLightbox(gallery.imgList[gallery.currentImgIdx]);
+            return false;
+        }
 		
 		this.scrollLeft = function(event) {
 			if(gallery.currentImgIdx >= gallery.imgList.length-1)
@@ -42,9 +49,7 @@ function Gallery(id) {
 			
 			//add onclick handler for new centered image
             gallery.imgList[gallery.currentImgIdx].off('click');
-			gallery.imgList[gallery.currentImgIdx].on("click", function() {
-					gallery.showLightbox(gallery.imgList[gallery.currentImgIdx]);
-				}).css("cursor", "pointer");
+			gallery.imgList[gallery.currentImgIdx].on("click", gallery.lightboxClick).css("cursor", "pointer");
 			
 		};
 				
@@ -64,13 +69,13 @@ function Gallery(id) {
 			gallery.currentImgIdx -= 1;
 			//add onclick handler for new centered image
             gallery.imgList[gallery.currentImgIdx].off('click');
-			gallery.imgList[gallery.currentImgIdx].on("click", function() {
-					gallery.showLightbox(gallery.imgList[gallery.currentImgIdx]);
-				}).css("cursor", "pointer");
+			gallery.imgList[gallery.currentImgIdx].on("click", gallery.lightboxClick).css("cursor", "pointer");
 			
 		};
 		
 		this.showLightbox = function(img) {
+            if(gallery.lightboxShown) return;
+
 			console.log("Lightboxing " + img.attr('src'));
 
 			var $lbImg = $(document.createElement("img")).attr('src', img.attr('src'));
@@ -90,13 +95,15 @@ function Gallery(id) {
                 $lightboxWrapper.lightbox_me({
                     centered: true,
                     destroyOnClose: true,
-                    closeSelector: ".lbImage"
+                    closeSelector: ".lbImage",
+                    onClose: function() { gallery.lightboxShown = false; }
                 });
 
                 $lbImg.css("maxWidth", ($(window).width() - 20) + "px");
                 $lbImg.css("maxHeight", ($(window).height() - 20) + "px");
                 $lightboxWrapper.show();
 			});
+            gallery.lightboxShown = true;
 		};
 
 
@@ -191,9 +198,11 @@ function Gallery(id) {
 					img.css("cursor", "pointer");
 				}
 
-                //refresh profileScroll width after image is loaded
+                //refresh profileScroll height after image is loaded
                 if(profileScroll != null)
-                    profileScroll.refresh();
+                    setTimeout(function () {
+                        profileScroll.refresh();
+                    }, 0);
 			});
 
 		});
@@ -202,6 +211,7 @@ function Gallery(id) {
 		//(so we know their widths for scrolling)
 		//onLoad doesn't work for wrapper, only for $(window)
 		//$(window).on("load", function (){
+
         if (Modernizr.touch) {
             $('#gallerySwiper').swipe({
                 swipe:function(event, direction, distance, duration, fingerCount) {
@@ -215,6 +225,7 @@ function Gallery(id) {
                 }
             });
         }
+
 
         gallery.$arrowLeft.click(gallery.scrollRight);
         gallery.$arrowRight.click(gallery.scrollLeft);
