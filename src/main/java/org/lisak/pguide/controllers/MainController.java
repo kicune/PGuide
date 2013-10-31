@@ -59,14 +59,7 @@ public class MainController {
         showImage("fixme", response);
     }
 
-    @RequestMapping(value="/article/{articleId}", method = RequestMethod.GET)
-    public String showArticle(@PathVariable("articleId") String articleId, Model model) {
-        Article article = (Article)contentDao.get(articleId);
-        model.addAttribute(article);
-        return "showArticle";
-    }
-
-    @RequestMapping(value="/article2/{articleId}", method = RequestMethod.GET)
+    @RequestMapping(value={"/article2/{articleId}", "/article/{articleId}"}, method = RequestMethod.GET)
     public String showArticleV2(@PathVariable("articleId") String articleId, Model model) {
         Article article = (Article)contentDao.get(articleId);
         model.addAttribute(article);

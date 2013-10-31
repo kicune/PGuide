@@ -180,6 +180,13 @@ $(document).ready(function () {
         //prepare hashMap of markers
         prepareMarkers(data);
 
+        //handler for links that show just a map
+        $(".showMapOnly").click( function(event) {
+            event.preventDefault();
+            showMap();
+            MAP_SHOWN = true;
+        });
+
         //show map by default, if it is called by /map URL
         if(mapOnly) {
             showMap();

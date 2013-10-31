@@ -180,8 +180,8 @@ $(document).ready(function(){
     //FIXME: landscape orientace na telefonu - neni videt spodni sipka
     //FIXME: hide content before redraw to prevent flickering
 
-    //hide arrows (on small viewscreens). isMain is defined on main page
-    if($main.width()<MIN_COLUMN_WIDTH && !isMain) {
+    //hide arrows (on small viewscreens).
+    if($main.width()<MIN_COLUMN_WIDTH) {
 
         //arrows shown only on title page, hidden otherways.
         //after click the article shifts to the right
@@ -203,7 +203,8 @@ $(document).ready(function(){
                 }
             });
 
-        } else {
+        }
+        // else {       //let's try to have CLICK on arrow active as well as swipe
             $arrows.click(function() {
                 if(arrowsVisible) {
                     hideArrows();
@@ -211,7 +212,7 @@ $(document).ready(function(){
                     showArrows();
                 }
             });
-        }
+        //}
     } else {
         arrowsVisible = true;
     }

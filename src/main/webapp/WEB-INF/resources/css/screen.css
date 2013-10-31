@@ -49,6 +49,16 @@ html,body{
     max-width: 640px;
 }
 
+div.breadcrumbs {
+    margin-top: 5px;
+}
+
+div.breadcrumbs a,
+div.breadcrumbs a:link,
+div.breadcrumbs a:hover,
+div.breadcrumbs a:visited,
+div.breadcrumbs a:active {color: black}
+
 /**** MAP ****/
 
 #map-canvas {

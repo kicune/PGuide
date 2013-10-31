@@ -37,6 +37,8 @@ profile - po kliknuti na profil se zprava vysune profil a odsune clanek i se sip
     <script type="text/javascript">
         //additional arguments from controller to JS
         var isMain = ${isMain ? "true" : "false" };
+                //true for the main (root) article. Originally used for showing arrows on the main page.
+                // Ignored ATM
         var mapOnly = ${mapOnly ? "true" : "false" };
         //global flag to determine whether map is shown
         var MAP_SHOWN;
@@ -46,7 +48,7 @@ profile - po kliknuti na profil se zprava vysune profil a odsune clanek i se sip
 
 </head>
 <body>
-    <div id="pageHeader"></div><div id="background"></div>
+     <a href='/'><div id="pageHeader"></div></a><div id="background"></div>
      <div id="bodyWrapper">
 
         <div id="arrowsWrapper">
@@ -96,6 +98,7 @@ profile - po kliknuti na profil se zprava vysune profil a odsune clanek i se sip
 
          <div id="mainColumn">
             <div id="article">
+                <div class="breadcrumbs">${article.breadcrumbs}</div>
                 <h1>${article.title}</h1>
                 <div id="log"></div>
 
