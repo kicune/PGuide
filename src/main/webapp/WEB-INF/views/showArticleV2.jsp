@@ -57,9 +57,9 @@ profile - po kliknuti na profil se zprava vysune profil a odsune clanek i se sip
                         <div class="title">Taste of Prague</div>
                         <div class="arrowCategories">
                             <div class="category"><a href="/article2/pubs">Pubs</a></div>
-                            <div class="category"><a href="/article2/patis">Patisseries</a></div>
+                            <div class="category"><a href="/article2/patiss">Patisseries</a></div>
                             <div class="category"><a href="/article2/cafes">Caffés</a></div>
-                            <div class="category">Restaurants</div>
+                            <div class="category"><a href="/article2/rest">Restaurants</a></div>
                             <div class="category-inactive">Wine bars</div>
                         </div>
                     </div>
