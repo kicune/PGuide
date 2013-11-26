@@ -128,6 +128,11 @@ div.breadcrumbs a:active {color: black}
     padding-top: 4px
 }
 
+#article > div {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
 div.article-even {
     float: right;
     padding: 3px 5px 3px 5px;

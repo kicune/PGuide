@@ -69,7 +69,7 @@ profile - po kliknuti na profil se zprava vysune profil a odsune clanek i se sip
                     <div class="arrowCategories">
                         <div class="category">Architecture</div>
                         <div class="category">History</div>
-                        <div class="category">Legends &amp; Mysteries</div>
+                        <div class="category"><a href="/article2/legends">Legends &amp; Mysteries</a></div>
                     </div>
                 </div>
 
