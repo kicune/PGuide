@@ -57,18 +57,18 @@ profile - po kliknuti na profil se zprava vysune profil a odsune clanek i se sip
                         <div class="title">Taste of Prague</div>
                         <div class="arrowCategories">
                             <div class="category"><a href="/article2/pubs">Pubs</a></div>
-                            <div class="category">Patisseries</div>
+                            <div class="category"><a href="/article2/patis">Patisseries</a></div>
                             <div class="category"><a href="/article2/cafes">Caffés</a></div>
                             <div class="category">Restaurants</div>
-                            <div class="category">Wine bars</div>
+                            <div class="category-inactive">Wine bars</div>
                         </div>
                     </div>
 
                 <div class="arrow" id="storyArrow">
                     <div class="title">Story of Prague</div>
                     <div class="arrowCategories">
-                        <div class="category">Architecture</div>
-                        <div class="category">History</div>
+                        <div class="category-inactive">Architecture</div>
+                        <div class="category-inactive">History</div>
                         <div class="category"><a href="/article2/legends">Legends &amp; Mysteries</a></div>
                     </div>
                 </div>
@@ -76,20 +76,20 @@ profile - po kliknuti na profil se zprava vysune profil a odsune clanek i se sip
                 <div class="arrow" id="lifeArrow">
                     <div class="title">Life in Prague</div>
                     <div class="arrowCategories">
-                        <div class="category">Transport</div>
-                        <div class="category">Lodging</div>
-                        <div class="category">Annoyances</div>
-                        <div class="category">Internet</div>
+                        <div class="category-inactive">Transport</div>
+                        <div class="category-inactive">Lodging</div>
+                        <div class="category-inactive">Annoyances</div>
+                        <div class="category-inactive">Internet</div>
                     </div>
                 </div>
 
                 <div class="arrow" id="funArrow">
                     <div class="title">Fun in Prague</div>
                     <div class="arrowCategories">
-                        <div class="category">Geocaches</div>
-                        <div class="category">City walks</div>
-                        <div class="category">Museums &amp; Galleries</div>
-                        <div class="category">Surroundings</div>
+                        <div class="category-inactive">Geocaches</div>
+                        <div class="category-inactive">City walks</div>
+                        <div class="category-inactive">Museums &amp; Galleries</div>
+                        <div class="category-inactive">Surroundings</div>
                     </div>
                 </div>
 

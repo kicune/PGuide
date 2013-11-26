@@ -35,6 +35,14 @@ div.arrowCategories > div.category {
     margin: 1px;
 }
 
+div.arrowCategories > div.category-inactive {
+    padding: 0 2px 0 2px;
+    display: inline-block;
+    color: white;
+    margin: 1px;
+    background-color: #999999;
+}
+
 div.arrowCategories a {
     text-decoration: none;
     color: inherit;
