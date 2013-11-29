@@ -59,7 +59,7 @@
     <bean id="restaurantCategory" class="org.lisak.pguide.model.Category">
         <property name="id" value="restaurants"/>
         <property name="name" value="Restaurants"/>
-        <property name="iconUrl" value="/resources/img/legends.png"/>
+        <property name="iconUrl" value="/resources/img/restaurant.png"/>
     </bean>
 
     <bean id="categoryFactory" class="org.lisak.pguide.model.CategoryFactory">
