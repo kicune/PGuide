@@ -50,6 +50,18 @@
         <property name="iconUrl" value="/resources/img/patisserie.png"/>
     </bean>
 
+    <bean id="legendsCategory" class="org.lisak.pguide.model.Category">
+        <property name="id" value="legends"/>
+        <property name="name" value="Legends"/>
+        <property name="iconUrl" value="/resources/img/legends.png"/>
+    </bean>
+
+    <bean id="restaurantCategory" class="org.lisak.pguide.model.Category">
+        <property name="id" value="restaurants"/>
+        <property name="name" value="Restaurants"/>
+        <property name="iconUrl" value="/resources/img/legends.png"/>
+    </bean>
+
     <bean id="categoryFactory" class="org.lisak.pguide.model.CategoryFactory">
         <property name="categoryList">
             <list>
