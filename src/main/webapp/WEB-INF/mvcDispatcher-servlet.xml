@@ -68,6 +68,8 @@
                 <ref bean="coffeeCategory" />
                 <ref bean="pubCategory" />
                 <ref bean="patisCategory" />
+                <ref bean="restaurantCategory" />
+                <ref bean="legendsCategory" />
             </list>
         </property>
     </bean>
