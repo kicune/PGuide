@@ -97,6 +97,16 @@ public class Profile extends Content {
         this.name = name;
     }
 
+    public Boolean getHasOpeningHours() {
+        for(DayOpeningHours day : openingHours) {
+            if(day.getMorning()!= null && day.getMorning().length()>0)
+                return true;
+            if(day.getAfternoon()!= null && day.getAfternoon().length()>0)
+                return true;
+        }
+        return false;
+    }
+
     public List<DayOpeningHours> getOpeningHours() {
         return openingHours;
     }
