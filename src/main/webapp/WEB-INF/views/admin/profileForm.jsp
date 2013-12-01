@@ -111,7 +111,7 @@
     <c:forEach var="profile" items="${profileList}">
         <c:if test="${profile.category == filter || filter == ''}">
             <div>
-                <a style='text-decoration: none; color: red' href="/admin/profile/${profile.id}?delete" onclick="return confirm('Opravdu SMAZAT?')"><b>X</b></a>
+                <a style='text-decoration: none; color: red' href="/admin/profile/${profile.id}?delete=1" onclick="return confirm('Opravdu SMAZAT?')"><b>X</b></a>
                 &nbsp;&nbsp;
                 <a href="/admin/profile/${profile.id}?filter=${filter}">${profile.name}</a>
             </div>
