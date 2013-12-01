@@ -183,12 +183,17 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/profile/{profileId}", method = RequestMethod.GET)
-    public String showImage(@PathVariable("profileId") String profileId,
+    public String showProfile(@PathVariable("profileId") String profileId,
                             @RequestParam(value = "delete", required = false) String delete,
+                            @RequestParam(value = "filter", required = false) String filter,
                             Model model) {
         List<Profile> profileList;
         profileList =  contentDao.getProfiles();
         model.addAttribute(profileList);
+
+        if(filter == null)
+            filter = "";
+        model.addAttribute("filter", filter);
 
         List<Image> imageList = contentDao.getImages();
         model.addAttribute("strImgList", imageList.toString());
@@ -210,10 +215,10 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
-    public String saveProfile(@ModelAttribute("profile") Profile profile){
+    public String saveProfile(@ModelAttribute("profile") Profile profile,
+                              @RequestParam(value = "filter", required = false) String filter){
         contentDao.save(profile);
-
-        return "redirect:/admin/profile/" + profile.getId();
+        return "redirect:/admin/profile/" + profile.getId() + "?filter=" + filter;
     }
 
     @RequestMapping(value = "/createStaticMap", method = RequestMethod.POST)

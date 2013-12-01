@@ -113,7 +113,7 @@
             <div>
                 <a style='text-decoration: none; color: red' href="/admin/profile/${profile.id}?delete" onclick="return confirm('Opravdu SMAZAT?')"><b>X</b></a>
                 &nbsp;&nbsp;
-                <a href="/admin/profile/${profile.id}">${profile.name}</a>
+                <a href="/admin/profile/${profile.id}?filter=${filter}">${profile.name}</a>
             </div>
         </c:if>
     </c:forEach>
@@ -125,6 +125,7 @@
 
 <div id="mainColumn">
 <sf:form modelAttribute="profile" method="POST" action="/admin/profile">
+    <input type='hidden' name="filter" value="${filter}">
     <div>ID:</div>
     <div><sf:input path="id" /></div>
 
