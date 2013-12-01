@@ -95,12 +95,27 @@
 <body>
 <div id="leftColumn">
     <h3>Seznam profilů</h3>
+
+    <form name="profileFilter" action="/admin/profile/">
+        <select name="filter" onchange="this.form.submit()">
+            <option value="">Všechny profily</option>
+            <c:forEach items="${categoryList}" var="category">
+                <option value="${category.id}"
+                    <c:if test="${category.id == filter}">selected</c:if>>${category.name}</option>
+            </c:forEach>
+        </select>
+
+    </form>
+    <br/>
+
     <c:forEach var="profile" items="${profileList}">
-        <div>
-            <a style='text-decoration: none; color: red' href="/admin/profile/${profile.id}?delete" onclick="return confirm('Opravdu SMAZAT?')"><b>X</b></a>
-            &nbsp;&nbsp;
-            <a href="/admin/profile/${profile.id}">${profile.name}</a>
-        </div>
+        <c:if test="${profile.category == filter || filter == ''}">
+            <div>
+                <a style='text-decoration: none; color: red' href="/admin/profile/${profile.id}?delete" onclick="return confirm('Opravdu SMAZAT?')"><b>X</b></a>
+                &nbsp;&nbsp;
+                <a href="/admin/profile/${profile.id}">${profile.name}</a>
+            </div>
+        </c:if>
     </c:forEach>
     <br>
     <div><a href="/admin/profile">Přidat nový profil</a></div>

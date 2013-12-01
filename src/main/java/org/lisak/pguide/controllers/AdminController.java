@@ -162,10 +162,15 @@ public class AdminController {
 
     // ******** Profile upload & processing **********
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String newProfile(Model model) {
+    public String newProfile(@RequestParam(value = "filter", required = false) String filter,
+                             Model model) {
         List<Profile> profileList;
         profileList =  contentDao.getProfiles();
         model.addAttribute(profileList);
+
+        if(filter == null)
+            filter = "";
+        model.addAttribute("filter", filter);
 
         List<Image> imageList = contentDao.getImages();
         model.addAttribute("strImgList", imageList.toString());
