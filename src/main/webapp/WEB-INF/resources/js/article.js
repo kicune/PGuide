@@ -164,7 +164,9 @@ $(document).ready(function(){
     MAX_COLUMN_WIDTH = 640;
 
 
-    //TODO: background - probably different background image for different aspect ratios
+    //different background image for different aspect ratios
+    if( $(window).width()/ $(window).height() < 0.8)
+        $('#background').css('background', 'url("/resources/img/background1.jpg") no-repeat top left');
 
     //set up article's width - if possible, leave place for a profile
     var articleWidth = $(window).width() - ARROW_WIDTH - PROFILE_WIDTH;

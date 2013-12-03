@@ -16,7 +16,7 @@ html,body{
     width: 100%;
     z-index: -1;
     position: fixed;
-    background: url("../img/background1024.jpg") no-repeat top left;
+    background: url("../img/background2.jpg") no-repeat top left;
     background-attachment: fixed !important;
     background-size: cover !important;
 }
