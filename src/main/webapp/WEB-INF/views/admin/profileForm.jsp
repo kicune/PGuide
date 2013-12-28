@@ -82,7 +82,8 @@
                 //fetch GPS coords
                 var gps = $("#gpsCoords").val();
                 var mapId = $("#id").val() + "-map";
-                $.ajax({url:"/admin/createStaticMap", type:"POST", data:{id:mapId, gps:gps}, success: function() {
+                var ctgr = $("#category").val();
+                $.ajax({url:"/admin/createStaticMap", type:"POST", data:{id:mapId, gps:gps, category:ctgr}, success: function() {
                     //on success, set id of the created image to the map field
                     $("#staticMapImg").val(mapId);
                 }})

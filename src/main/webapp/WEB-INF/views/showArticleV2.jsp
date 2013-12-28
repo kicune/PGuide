@@ -120,7 +120,8 @@ profile - po kliknuti na profil se zprava vysune profil a odsune clanek i se sip
             <div><input type='checkbox' class='markerFilter' id='coffee' checked>Cafés</div>
             <div><input type='checkbox' class='markerFilter' id='pub' checked>Pubs</div>
             <div><input type='checkbox' class='markerFilter' id='patisserie' checked>Patisseries</div>
-            <div><input type='checkbox' class='markerFilter' id='restaurant' checked>Restaurants</div>
+            <div><input type='checkbox' class='markerFilter' id='restaurants' checked>Restaurants</div>
+            <div><input type='checkbox' class='markerFilter' id='legends' checked>Legends</div>
         </div>
         <div id='closeMap' title="Close map and return to article">Close Map</div>
     </div>

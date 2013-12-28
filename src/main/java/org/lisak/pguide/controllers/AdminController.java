@@ -225,10 +225,11 @@ public class AdminController {
     @ResponseStatus(value = HttpStatus.OK)
     public void createStaticMap(@ModelAttribute("id") String id,
                                 @ModelAttribute("gps") String gps,
+                                @ModelAttribute("category") String category,
                                 HttpServletResponse response) throws IOException {
         String staticMapURL = "http://maps.googleapis.com/maps/api/staticmap?";
         String staticMapParams = "zoom=15&size=318x126&sensor=false&" +
-                "visual_refresh=true&markers=icon:http://www.pguide.cz/resources/img/coffee-selected.png%%7C%s,%s";
+                "visual_refresh=true&markers=icon:http://www.pguide.cz/resources/img/" + category + "-selected.png%%7C%s,%s";
 
         //parameters: id, long, lat
         //called via AJAX/jquery from edit profile page
